@@ -6,30 +6,43 @@
     <title>Amit Bhalla - Marketing Strategist</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
         /* Core variables */
         :root {
             /* Dark mode */
-            --dark-bg: #0A192F;
-            --dark-card: #112240;
-            --dark-text: #E0E0E0;
-            --dark-accent: #1ABC9C;
-            --dark-accent-hover: #26C6DA;
+            --dark-bg: #1a2742; /* Darker shade of the navy */
+            --dark-bg-secondary: #253c74; /* Navy blue from user's input */
+            --dark-card: #202b4f; /* Slightly lighter than background */
+            --dark-surface: #2a3356; /* For cards and interactive elements */
+            --dark-text: #f1f5f9; /* Light text color for dark mode */
+            --dark-accent: #ee3897; /* Pink accent from user's input */
+            --dark-accent-hover: #f054a8; /* Lighter pink for hover */
+            --dark-muted: #6b7280; /* Muted text color */
+            --dark-border: rgba(238, 56, 151, 0.25); /* Semi-transparent accent for borders */
             
             /* Light mode */
-            --light-bg: #EFF8FB;
-            --light-card: #FFFFFF;
-            --light-text: #2C3E50;
-            --light-accent: #1ABC9C;
-            --light-accent-hover: #16A085;
+            --light-bg: #f8fafc; /* Light background */
+            --light-bg-secondary: #e8f4f8; /* Slight bluish tint */
+            --light-card: #ffffff; /* White for cards */
+            --light-surface: #f1f5f9; /* For interactive elements */
+            --light-text: #0e3f54; /* Deep blue from user's input */
+            --light-accent: #3ba8bf; /* Teal blue from user's input */
+            --light-accent-hover: #2c9aad; /* Darker teal for hover */
+            --light-secondary: #90c963; /* Green from user's input */
+            --light-muted: #64748b; /* Muted text color */
+            --light-border: rgba(59, 168, 191, 0.25); /* Semi-transparent accent for borders */
             
             /* Common */
-            --transition-speed: 0.5s;
-            --border-radius: 16px;
-            --shadow: 0 20px 80px -20px rgba(0, 0, 0, 0.2);
+            --transition-speed: 0.4s;
+            --border-radius-sm: 8px;
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             
             /* Smooth scrolling for the entire page */
             scroll-behavior: smooth;
@@ -38,52 +51,64 @@
         /* Base Theme Setup */
         .dark {
             --bg-color: var(--dark-bg);
+            --bg-secondary: var(--dark-bg-secondary);
             --card-bg: var(--dark-card);
+            --surface: var(--dark-surface);
             --text-color: var(--dark-text);
+            --text-muted: var(--dark-muted);
             --accent-color: var(--dark-accent);
             --accent-hover: var(--dark-accent-hover);
-            --glow-color: rgba(38, 198, 218, 0.5);
-            --border-color: rgba(38, 198, 218, 0.2);
-            --glass-bg: rgba(17, 34, 64, 0.6);
+            --border-color: var(--dark-border);
             --scroll-thumb: var(--dark-accent);
-            --surface-bg: rgba(17, 34, 64, 0.8);
+            --glass-bg: rgba(32, 43, 79, 0.8);
+            --shadow-color: rgba(0, 0, 0, 0.4);
         }
         
         .light {
             --bg-color: var(--light-bg);
+            --bg-secondary: var(--light-bg-secondary);
             --card-bg: var(--light-card);
+            --surface: var(--light-surface);
             --text-color: var(--light-text);
+            --text-muted: var(--light-muted);
             --accent-color: var(--light-accent);
             --accent-hover: var(--light-accent-hover);
-            --glow-color: rgba(22, 160, 133, 0.1);
-            --border-color: rgba(22, 160, 133, 0.2);
-            --glass-bg: rgba(255, 255, 255, 0.7);
+            --border-color: var(--light-border);
             --scroll-thumb: var(--light-accent);
-            --surface-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(14, 63, 84, 0.1);
         }
 
         /* Global Styles */
         body {
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Work Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color var(--transition-speed), color var(--transition-speed);
             overflow-x: hidden;
-            background-image: radial-gradient(
-                circle at 10% 20%, 
-                rgba(26, 188, 156, 0.03) 0%, 
-                transparent 40%
-            ), 
-            radial-gradient(
-                circle at 90% 80%, 
-                rgba(38, 198, 218, 0.03) 0%, 
-                transparent 40%
-            );
+            line-height: 1.6;
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Background patterns for depth */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--accent-color) 0%, transparent 8%),
+                radial-gradient(circle at 80% 70%, var(--accent-color) 0%, transparent 8%);
+            background-size: 60vw 60vw;
+            background-position: 0 0, 30vw 30vw;
         }
 
         /* Custom Scrollbar */
@@ -111,17 +136,18 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
         }
         
         /* Layout Components */
         .navigation-rail {
-            background: var(--surface-bg);
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-color);
             transition: all var(--transition-speed);
             z-index: 100;
+            box-shadow: 2px 0 10px var(--shadow-color);
         }
         
         .mobile-menu {
@@ -139,16 +165,32 @@
         .mobile-menu.active {
             clip-path: circle(150% at 92% 8%);
         }
+
+        /* Modern card design */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
         
-        /* Card Components */
+        /* Experience Card Components */
         .experience-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1.75rem;
             position: relative;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
         
         .experience-card::before {
@@ -164,25 +206,7 @@
         
         .experience-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .experience-card:hover::after {
-            opacity: 1;
-        }
-        
-        .experience-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, var(--glow-color), transparent 70%);
-            border-radius: var(--border-radius);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
+            box-shadow: var(--shadow-lg);
         }
         
         /* Interactive Elements */
@@ -191,47 +215,43 @@
             transition: all 0.3s ease;
             color: var(--text-color);
             opacity: 0.6;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
         }
         
         .nav-item.active {
             color: var(--accent-color);
             opacity: 1;
+            background-color: var(--surface);
         }
         
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-item:hover::after,
-        .nav-item.active::after {
-            width: 100%;
+        .nav-item:hover:not(.active) {
+            opacity: 0.8;
+            background-color: var(--surface);
         }
         
         .skill-bubble {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             padding: 0.5rem 1rem;
             border-radius: 50px;
-            background: rgba(26, 188, 156, 0.1);
-            color: var(--accent-color);
+            background: var(--surface);
+            color: var(--text-color);
             margin: 0.25rem;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            font-weight: 500;
         }
         
         .skill-bubble:hover {
             background: var(--accent-color);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--glow-color);
+            box-shadow: 0 5px 15px var(--shadow-color);
         }
         
         /* Theme Toggle */
@@ -239,7 +259,7 @@
             position: relative;
             width: 60px;
             height: 30px;
-            background: linear-gradient(to right, #0A192F, #26C6DA);
+            background: linear-gradient(to right, var(--dark-bg), var(--dark-accent));
             border-radius: 30px;
             cursor: pointer;
             display: flex;
@@ -251,7 +271,7 @@
         }
         
         .light .theme-toggle {
-            background: linear-gradient(to right, #EFF8FB, #1ABC9C);
+            background: linear-gradient(to right, var(--light-bg), var(--light-accent));
         }
         
         .theme-toggle i {
@@ -300,6 +320,7 @@
             position: relative;
             display: inline;
             color: var(--accent-color);
+            font-weight: 600;
             z-index: 1;
         }
         
@@ -314,69 +335,11 @@
             opacity: 0.2;
             z-index: -1;
         }
-        
-        .orbit-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 0 auto;
-        }
-        
-        .skill-orbit {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 1px dashed var(--border-color);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
-        
-        .skill-orbit:nth-child(1) {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-            animation-duration: 30s;
-            animation-direction: reverse;
-        }
-        
-        .skill-orbit:nth-child(2) {
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            animation-duration: 20s;
-        }
-        
-        .skill-planet {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            transform-origin: center;
-            animation: counter-rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes counter-rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
-        }
-        
+
         /* Timeline Component */
         .timeline {
             position: relative;
-            padding-left: 30px;
+            padding-left: 32px;
         }
         
         .timeline::before {
@@ -396,13 +359,14 @@
         
         .timeline-dot {
             position: absolute;
-            left: -39px;
-            width: 16px;
-            height: 16px;
+            left: -41px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: var(--accent-color);
             border: 3px solid var(--bg-color);
             z-index: 1;
+            box-shadow: 0 0 0 4px var(--border-color);
         }
         
         /* Animated sections */
@@ -420,68 +384,66 @@
         /* Skill chart */
         .skill-chart {
             width: 100%;
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
+            height: 8px;
+            background: var(--surface);
+            border-radius: 4px;
             overflow: hidden;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         
         .skill-level {
             height: 100%;
-            background: var(--accent-color);
-            border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+            border-radius: 4px;
             width: 0;
             transition: width 1s ease-in-out;
         }
         
         /* Tab System */
-        .tab-indicator {
-            position: absolute;
-            height: 40px;
-            background: var(--card-bg);
+        .tab-container {
+            background: var(--surface);
             border-radius: 50px;
-            z-index: -1;
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 4px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Custom cursor */
-        .custom-cursor {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: rgba(26, 188, 156, 0.2);
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background 0.3s;
+        .tab-btn {
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+            border-radius: 50px;
+        }
+        
+        .tab-btn.active {
+            color: var(--accent-color);
+        }
+        
+        .tab-indicator {
+            position: absolute;
+            height: calc(100% - 8px);
+            background: var(--accent-color);
+            border-radius: 50px;
+            z-index: 0;
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            top: 4px;
+        }
+        
+        /* Page specific styles */
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
             display: none;
         }
         
-        .custom-cursor.active {
-            width: 60px;
-            height: 60px;
-            background: rgba(26, 188, 156, 0.3);
-        }
-        
-        /* Certifications list */
-        .cert-item {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 12px;
-        }
-        
-        .cert-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-color);
-            border-radius: 50%;
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
         }
         
         /* Utility classes */
@@ -496,7 +458,7 @@
         .btn-primary {
             background: var(--accent-color);
             color: white;
-            border-radius: 30px;
+            border-radius: 50px;
             padding: 0.75rem 1.5rem;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -505,19 +467,20 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .btn-primary:hover {
             background: var(--accent-hover);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--glow-color);
+            box-shadow: 0 8px 15px var(--shadow-color);
         }
         
         .btn-outline {
             background: transparent;
             color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            border-radius: 30px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
             padding: 0.75rem 1.5rem;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -528,11 +491,35 @@
             background: var(--accent-color);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--glow-color);
+            box-shadow: 0 8px 15px var(--shadow-color);
         }
         
         .subtle-border {
             border: 1px solid var(--border-color);
+        }
+        
+        /* Badge component */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: var(--surface);
+            color: var(--text-color);
+        }
+        
+        /* Initials avatar */
+        .initials-avatar {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: var(--shadow);
         }
         
         /* Responsive Design */
@@ -549,7 +536,7 @@
         
         @media (max-width: 768px) {
             .experience-card {
-                padding: 1.25rem;
+                padding: 1.5rem;
             }
             
             .timeline {
@@ -560,29 +547,6 @@
                 left: -34px;
                 width: 14px;
                 height: 14px;
-            }
-            
-            .header-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .info-section {
-                justify-content: flex-start;
-                margin-top: 1rem;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .custom-cursor {
-                display: none !important;
-            }
-            
-            .skill-orbit, .skill-planet {
-                display: none;
-            }
-            
-            .btn-primary, .btn-outline {
-                padding: 0.5rem 1rem;
             }
         }
         
@@ -606,60 +570,31 @@
         .pulsing {
             animation: pulse 2s ease-in-out infinite;
         }
-        
-        /* Page specific styles */
-        .page-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            display: none;
-        }
-        
-        .page-content.active {
-            opacity: 1;
-            transform: translateY(0);
-            display: block;
-        }
-        
-        /* Mouse trail effect */
-        .trail {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0;
-            transition: opacity 0.2s;
-            transform: translate(-50%, -50%);
-        }
     </style>
 </head>
 <body>
-    <!-- Mouse cursor effects -->
-    <div class="custom-cursor"></div>
-    <div id="trail-container"></div>
+    <!-- Background pattern -->
+    <div class="bg-pattern"></div>
     
     <!-- Progress indicator -->
     <div class="progress-indicator">
         <div class="progress-bar" id="scrollProgress"></div>
     </div>
     
-    <!-- Mobile navigation -->
+    <!-- Mobile navigation header -->
     <div class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 glass md:hidden">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold">
+            <div class="initials-avatar w-10 h-10 text-lg">
                 AB
             </div>
-            <span class="font-semibold text-lg" style="text-transform: uppercase;">Amit Bhalla</span>
+            <span class="font-semibold text-lg">Amit Bhalla</span>
         </div>
         <div class="flex items-center space-x-4">
             <div class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
                 <i class="fas fa-sun"></i>
             </div>
-            <button id="mobileMenuToggle" class="p-2">
+            <button id="mobileMenuToggle" class="p-2 rounded-full hover:bg-surface">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
@@ -668,36 +603,36 @@
     <!-- Mobile menu overlay -->
     <div class="mobile-menu py-20 px-8">
         <div class="flex justify-end mb-8">
-            <button id="closeMenu" class="p-2">
+            <button id="closeMenu" class="p-2 rounded-full hover:bg-surface">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
         <div class="flex flex-col items-center space-y-6">
-            <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white text-3xl font-bold">
+            <div class="initials-avatar w-24 h-24 text-3xl">
                 AB
             </div>
-            <h2 class="text-2xl font-bold" style="text-transform: uppercase;">Amit Bhalla</h2>
-            <p class="text-center opacity-80">Marketing Leader & Strategist</p>
+            <h2 class="text-2xl font-bold">Amit Bhalla</h2>
+            <p class="text-center text-text-muted">Marketing Leader & Strategist</p>
             
             <div class="w-full mt-8">
                 <div class="flex justify-center mb-8">
-                    <div class="inline-flex p-1 rounded-full subtle-border relative">
+                    <div class="tab-container inline-flex">
                         <div class="tab-indicator"></div>
-                        <button data-tab="page1" class="mobile-tab-btn px-5 py-2 rounded-full z-10 font-medium text-sm active">Page 1</button>
-                        <button data-tab="page2" class="mobile-tab-btn px-5 py-2 rounded-full z-10 font-medium text-sm">Page 2</button>
+                        <button data-tab="page1" class="mobile-tab-btn tab-btn active">Experience</button>
+                        <button data-tab="page2" class="mobile-tab-btn tab-btn">Skills & Education</button>
                     </div>
                 </div>
                 
-                <div class="space-y-4 text-center">
-                    <a href="mailto:amit9815@gmail.com" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                <div class="space-y-4 mt-8">
+                    <a href="mailto:amit9815@gmail.com" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
                         <i class="fas fa-envelope"></i>
                         <span>amit9815@gmail.com</span>
                     </a>
-                    <a href="tel:+919910776381" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                    <a href="tel:+919910776381" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
                         <i class="fas fa-phone"></i>
                         <span>+91 9910776381</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                    <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
@@ -715,22 +650,22 @@
     
     <!-- Desktop navigation rail -->
     <div class="navigation-rail fixed top-0 left-0 h-screen w-20 flex flex-col items-center py-8 hidden md:flex">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold mb-8">
+        <div class="initials-avatar w-12 h-12 text-lg mb-8">
             AB
         </div>
         
-        <div class="flex flex-col items-center space-y-8 mt-8">
+        <div class="flex flex-col items-center space-y-5 mt-10">
             <a href="#summary" class="nav-item active" data-page="all">
-                <i class="fas fa-user text-xl"></i>
+                <i class="fas fa-user text-lg"></i>
             </a>
             <a href="#experience" class="nav-item" data-page="page1">
-                <i class="fas fa-briefcase text-xl"></i>
+                <i class="fas fa-briefcase text-lg"></i>
             </a>
             <a href="#skills" class="nav-item" data-page="page2">
-                <i class="fas fa-chart-pie text-xl"></i>
+                <i class="fas fa-chart-pie text-lg"></i>
             </a>
             <a href="#education" class="nav-item" data-page="page2">
-                <i class="fas fa-graduation-cap text-xl"></i>
+                <i class="fas fa-graduation-cap text-lg"></i>
             </a>
         </div>
         
@@ -745,23 +680,23 @@
     <!-- Main content area -->
     <div class="main-content ml-0 md:ml-20 pt-20 md:pt-0">
         <!-- Header area -->
-        <header class="pt-8 md:pt-12 px-6 md:px-20 pb-4 md:pb-12">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+        <header class="pt-12 md:pt-16 px-6 md:px-20 pb-8 md:pb-16">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-12">
                 <div>
-                    <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient" style="text-transform: uppercase;">Amit Bhalla</h1>
-                    <p class="text-xl md:text-2xl opacity-80">Marketing Leader & B2B SaaS Strategist</p>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient">Amit Bhalla</h1>
+                    <p class="text-xl md:text-2xl text-text-muted">Marketing Leader & B2B SaaS Strategist</p>
                 </div>
                 
-                <div class="mt-6 md:mt-0">
-                    <div class="hidden md:flex p-1 rounded-full subtle-border relative">
+                <div class="mt-8 md:mt-0">
+                    <div class="hidden md:flex tab-container">
                         <div class="tab-indicator"></div>
-                        <button data-tab="page1" class="desktop-tab-btn px-5 py-2 rounded-full z-10 font-medium active">Page 1</button>
-                        <button data-tab="page2" class="desktop-tab-btn px-5 py-2 rounded-full z-10 font-medium">Page 2</button>
+                        <button data-tab="page1" class="desktop-tab-btn tab-btn active">Experience</button>
+                        <button data-tab="page2" class="desktop-tab-btn tab-btn">Skills & Education</button>
                     </div>
                 </div>
             </div>
             
-            <div class="flex flex-col md:flex-row justify-between md:items-center mt-8 pb-6 border-b">
+            <div class="flex flex-col md:flex-row justify-between md:items-center mt-8 pb-8 border-b border-border-color">
                 <div class="flex flex-wrap gap-3">
                     <a href="mailto:amit9815@gmail.com" class="skill-bubble">
                         <i class="fas fa-envelope mr-2"></i>
@@ -777,7 +712,7 @@
                     </a>
                 </div>
                 
-                <div class="mt-4 md:mt-0">
+                <div class="mt-6 md:mt-0">
                     <a href="2024-Amit Bhalla-Resume_v2.2.pdf" class="btn-primary" target="_blank">
                         <i class="fas fa-download mr-2"></i>
                         Download Resume
@@ -801,17 +736,17 @@
             
             <!-- Metrics showcase -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
-                <div class="experience-card text-center py-8">
-                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">35%</div>
-                    <p class="text-lg opacity-80">Brand Recall Increase</p>
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">35%</div>
+                    <p class="text-lg text-text-muted">Brand Recall Increase</p>
                 </div>
-                <div class="experience-card text-center py-8">
-                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">50%</div>
-                    <p class="text-lg opacity-80">CAC Reduction</p>
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">50%</div>
+                    <p class="text-lg text-text-muted">CAC Reduction</p>
                 </div>
-                <div class="experience-card text-center py-8">
-                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">20%+</div>
-                    <p class="text-lg opacity-80">Pipeline Velocity Increase</p>
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">20%+</div>
+                    <p class="text-lg text-text-muted">Pipeline Velocity Increase</p>
                 </div>
             </div>
         </section>
@@ -829,31 +764,31 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Vice President - Strategy & Marketing</h3>
-                                        <p class="text-lg opacity-80 mt-1">Mynd Integrated Solutions</p>
+                                        <p class="text-lg text-text-muted mt-1">Mynd Integrated Solutions</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Aug 2024 – Present</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Aug 2024 – Present</span>
                                     </div>
                                 </div>
-                                <p class="mb-4">Part of the CEO's office (currently working as the Head of Marketing and Strategy functions)</p>
-                                <ul class="space-y-3">
+                                <p class="mb-5 italic">Part of the CEO's office (currently working as the Head of Marketing and Strategy functions)</p>
+                                <ul class="space-y-4">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Leading the Marketing and Strategy functions (Market Research, Insights, Performance Marketing, Employer Branding and Sales Operations)</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Rebuilding the digital identity for the brand (Website, social media, campaigns, etc.)</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Helping LOBs build their growth roadmaps for the next 3 years (Providing market insights, feature roadmap, TAM/ SAM and Sales Pitch Refinement</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Building roadmap to pave way for external investments (IPO readiness)</span>
                                     </li>
                                 </ul>
@@ -864,31 +799,31 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Marketing Director</h3>
-                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                        <p class="text-lg text-text-muted mt-1">Boston Consulting Group (BCG)</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Jan 2024 – Aug 2024</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jan 2024 – Aug 2024</span>
                                     </div>
                                 </div>
-                                <p class="mb-4">Head of Employer Brand for BCG in Asia Pacific</p>
-                                <ul class="space-y-3">
+                                <p class="mb-5 italic">Head of Employer Brand for BCG in Asia Pacific</p>
+                                <ul class="space-y-4">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Developed BCG's talent attraction framework (in AP), the basis of our marketing strategy, resulting high applications (conversions) and improving our diversity (DEI) slate</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Co-developed BCG's current recruiting campaign, "Beyond is where we begin"; part of the core team and owned the Asia Pacific perspective, development, and campaign activation</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Leading the employer branding team, which designs and executes omnichannel marketing strategies to build, attract, and nurture high-potential talent</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Reduced recruiting costs, Time to hire. Improved engagement rates across social. Enhanced careers website footfall for all Asia Pacific countries. Improved Team NPS by 20 points. Solidified talent pipelines.</span>
                                     </li>
                                 </ul>
@@ -899,31 +834,31 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Senior Marketing Manager</h3>
-                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                        <p class="text-lg text-text-muted mt-1">Boston Consulting Group (BCG)</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Nov 2022 – Dec 2023</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Nov 2022 – Dec 2023</span>
                                     </div>
                                 </div>
-                                <p class="opacity-70 mb-4 italic">1 year 2 months</p>
-                                <ul class="space-y-3">
+                                <p class="text-text-muted mb-5 italic">1 year 2 months</p>
+                                <ul class="space-y-4">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Created the marketing and employer branding strategy for the 12 countries under my purview.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Introduced talent attraction and employer branding to BCG's Asia Pacific recruiting function.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Took over all our social media (AP) and digital platforms (LinkedIn, Meta, careers website, job boards, etc.)</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Focused on enhancing brand value, reducing hiring costs and building out candidate pipelines.</span>
                                     </li>
                                 </ul>
@@ -934,31 +869,31 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Product Marketing Manager</h3>
-                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                        <p class="text-lg text-text-muted mt-1">Boston Consulting Group (BCG)</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Jan 2019 – Oct 2022</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jan 2019 – Oct 2022</span>
                                     </div>
                                 </div>
-                                <p class="opacity-70 mb-4 italic">3 years 10 months</p>
-                                <ul class="space-y-3">
+                                <p class="text-text-muted mb-5 italic">3 years 10 months</p>
+                                <ul class="space-y-4">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Developed and executed product marketing strategies for BCG B2B solutions (Lighthouse, KEY, OrgBuilder, etc.), contributing to an increase in product adoption and revenue growth.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Spearheaded the launch of two B2B products, driving initial sales through targeted go-to-market strategies and robust client engagement initiatives.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Collaborated with cross-functional teams (Sales, Product Development, and Customer Success) to ensure alignment on product messaging and positioning.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Managed end-to-end marketing campaigns, from market research, market segmentation, competitive analysis, and content creation. Achieved a significant increase in MQLs (Marketing Qualified Leads).</span>
                                     </li>
                                 </ul>
@@ -969,27 +904,27 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Marketing Lead</h3>
-                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                        <p class="text-lg text-text-muted mt-1">Boston Consulting Group (BCG)</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">May 2014 – Dec 2018</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">May 2014 – Dec 2018</span>
                                     </div>
                                 </div>
-                                <p class="opacity-70 mb-4 italic">4 years 8 months</p>
-                                <ul class="space-y-3">
+                                <p class="text-text-muted mb-5 italic">4 years 8 months</p>
+                                <ul class="space-y-4">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Led the development and execution of comprehensive communication and PR strategies to enhance BCG's brand reputation and visibility in the B2B sector.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Managed media relations, securing coverage in top-tier industry publications and achieving an increase in positive media mentions.</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
                                         <span>Developed crisis communication plans and managed PR crises, effectively mitigating negative publicity and maintaining brand integrity.</span>
                                     </li>
                                 </ul>
@@ -1010,16 +945,16 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Senior Analyst</h3>
-                                        <p class="text-lg opacity-80 mt-1">McKinsey & Company</p>
+                                        <p class="text-lg text-text-muted mt-1">McKinsey & Company</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Jul 2012 – Apr 2014</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jul 2012 – Apr 2014</span>
                                     </div>
                                 </div>
-                                <p class="opacity-70 mb-4 italic">1 year 10 months</p>
+                                <p class="text-text-muted mb-5 italic">1 year 10 months</p>
                                 <p>I worked on Product Marketing and management for the Digital Benchmarking Solution (McKBench). Executed a comprehensive marketing and sales strategy to effectively communicate the platform's value to stakeholders. Managed the brand for the benchmarking platform, ensuring a consistent and compelling image across all channels and touchpoints.</p>
                             </div>
                         </div>
@@ -1028,16 +963,16 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Analyst</h3>
-                                        <p class="text-lg opacity-80 mt-1">McKinsey & Company</p>
+                                        <p class="text-lg text-text-muted mt-1">McKinsey & Company</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">Jul 2009 – Jun 2012</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jul 2009 – Jun 2012</span>
                                     </div>
                                 </div>
-                                <p class="opacity-70 mb-4 italic">3 years</p>
+                                <p class="text-text-muted mb-5 italic">3 years</p>
                                 <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
                             </div>
                         </div>
@@ -1046,36 +981,36 @@
                         <div class="timeline-item fade-up">
                             <div class="timeline-dot"></div>
                             <div class="experience-card">
-                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
                                     <div>
                                         <h3 class="text-xl md:text-2xl font-bold">Earlier Roles</h3>
-                                        <p class="text-lg opacity-80 mt-1">Various Companies</p>
+                                        <p class="text-lg text-text-muted mt-1">Various Companies</p>
                                     </div>
-                                    <div class="mt-2 md:mt-0">
-                                        <span class="skill-bubble">2003 – 2009</span>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">2003 – 2009</span>
                                     </div>
                                 </div>
-                                <div class="space-y-4 mt-4">
-                                    <div class="p-4 rounded-lg subtle-border">
-                                        <div class="flex justify-between mb-2">
+                                <div class="space-y-4 mt-6">
+                                    <div class="p-5 rounded-lg card">
+                                        <div class="flex justify-between items-center mb-3">
                                             <h4 class="font-semibold">Junior Analyst, McKinsey & Company</h4>
-                                            <span class="text-sm opacity-80">Oct 2008 – Jun 2009</span>
+                                            <span class="text-sm text-text-muted">Oct 2008 – Jun 2009</span>
                                         </div>
                                         <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams.</p>
                                     </div>
                                     
-                                    <div class="p-4 rounded-lg subtle-border">
-                                        <div class="flex justify-between mb-2">
+                                    <div class="p-5 rounded-lg card">
+                                        <div class="flex justify-between items-center mb-3">
                                             <h4 class="font-semibold">MIS Executive, HCLTech</h4>
-                                            <span class="text-sm opacity-80">Jan 2007 – Sep 2008</span>
+                                            <span class="text-sm text-text-muted">Jan 2007 – Sep 2008</span>
                                         </div>
                                         <p>Responsible for client reporting on call data originating from agents who answered technical queries over the phone.</p>
                                     </div>
                                     
-                                    <div class="p-4 rounded-lg subtle-border">
-                                        <div class="flex justify-between mb-2">
+                                    <div class="p-5 rounded-lg card">
+                                        <div class="flex justify-between items-center mb-3">
                                             <h4 class="font-semibold">Marketing Executive, SBI MUTUAL FUND</h4>
-                                            <span class="text-sm opacity-80">Apr 2003 – Mar 2005</span>
+                                            <span class="text-sm text-text-muted">Apr 2003 – Mar 2005</span>
                                         </div>
                                         <p>Reinvigorated the agent sales network and directly sold Mutual Funds. Set up the office of SBI Mutual Funds in Shimla from the ground up.</p>
                                     </div>
@@ -1091,9 +1026,9 @@
                     <section id="skills" class="fade-up">
                         <h2 class="text-3xl font-bold mb-8">Skills & Expertise</h2>
                         
-                        <div class="experience-card space-y-6">
+                        <div class="experience-card space-y-8">
                             <div>
-                                <h3 class="text-xl font-semibold mb-4">Marketing Strategy</h3>
+                                <h3 class="text-xl font-semibold mb-5">Marketing Strategy</h3>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="skill-bubble">Brand Strategy</span>
                                     <span class="skill-bubble">Market Research</span>
@@ -1104,7 +1039,7 @@
                             </div>
                             
                             <div>
-                                <h3 class="text-xl font-semibold mb-4">Digital Marketing</h3>
+                                <h3 class="text-xl font-semibold mb-5">Digital Marketing</h3>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="skill-bubble">Social Media</span>
                                     <span class="skill-bubble">Content Strategy</span>
@@ -1115,7 +1050,7 @@
                             </div>
                             
                             <div>
-                                <h3 class="text-xl font-semibold mb-4">Business & Leadership</h3>
+                                <h3 class="text-xl font-semibold mb-5">Business & Leadership</h3>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="skill-bubble">Team Management</span>
                                     <span class="skill-bubble">Stakeholder Management</span>
@@ -1130,11 +1065,11 @@
                         <div class="experience-card mt-8">
                             <h3 class="text-xl font-semibold mb-6">Technical Skills</h3>
                             
-                            <div class="space-y-5">
+                            <div class="space-y-6">
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Photoshop & Design Tools</span>
-                                        <span class="text-sm opacity-80">Expert</span>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Photoshop & Design Tools</span>
+                                        <span class="text-sm text-accent-color font-medium">Expert</span>
                                     </div>
                                     <div class="skill-chart">
                                         <div class="skill-level" data-level="95"></div>
@@ -1142,9 +1077,9 @@
                                 </div>
                                 
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Digital Marketing Platforms</span>
-                                        <span class="text-sm opacity-80">Expert</span>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Digital Marketing Platforms</span>
+                                        <span class="text-sm text-accent-color font-medium">Expert</span>
                                     </div>
                                     <div class="skill-chart">
                                         <div class="skill-level" data-level="90"></div>
@@ -1152,9 +1087,9 @@
                                 </div>
                                 
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Data Analysis & Reporting</span>
-                                        <span class="text-sm opacity-80">Advanced</span>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Data Analysis & Reporting</span>
+                                        <span class="text-sm text-accent-color font-medium">Advanced</span>
                                     </div>
                                     <div class="skill-chart">
                                         <div class="skill-level" data-level="85"></div>
@@ -1162,9 +1097,9 @@
                                 </div>
                                 
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Web Development</span>
-                                        <span class="text-sm opacity-80">Intermediate</span>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Web Development</span>
+                                        <span class="text-sm text-accent-color font-medium">Intermediate</span>
                                     </div>
                                     <div class="skill-chart">
                                         <div class="skill-level" data-level="70"></div>
@@ -1172,9 +1107,9 @@
                                 </div>
                                 
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Python & Programming</span>
-                                        <span class="text-sm opacity-80">Intermediate</span>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Python & Programming</span>
+                                        <span class="text-sm text-accent-color font-medium">Intermediate</span>
                                     </div>
                                     <div class="skill-chart">
                                         <div class="skill-level" data-level="65"></div>
@@ -1185,7 +1120,7 @@
                     </section>
                     
                     <!-- Education and Certifications -->
-                    <section class="fade-up">
+                    <section id="education" class="fade-up">
                         <h2 class="text-3xl font-bold mb-8">Education & Certifications</h2>
                         
                         <!-- Education -->
@@ -1193,25 +1128,43 @@
                             <h3 class="text-xl font-semibold mb-6">Education</h3>
                             
                             <div class="space-y-8">
-                                <div class="relative pl-8">
-                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
-                                    <h4 class="text-lg font-semibold">MBA, Marketing & Finance</h4>
-                                    <p class="opacity-80 mt-1">I.K. Gujral Punjab Technical University</p>
-                                    <p class="text-sm mt-1">2005 – 2007</p>
+                                <div class="card p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-graduation-cap text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">MBA, Marketing & Finance</h4>
+                                            <p class="text-text-muted">I.K. Gujral Punjab Technical University</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-text-muted ml-14">2005 – 2007</p>
                                 </div>
                                 
-                                <div class="relative pl-8">
-                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
-                                    <h4 class="text-lg font-semibold">BBA</h4>
-                                    <p class="opacity-80 mt-1">Punjab University (Chandigarh)</p>
-                                    <p class="text-sm mt-1">2003 – 2005</p>
+                                <div class="card p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-graduation-cap text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">BBA</h4>
+                                            <p class="text-text-muted">Punjab University (Chandigarh)</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-text-muted ml-14">2003 – 2005</p>
                                 </div>
                                 
-                                <div class="relative pl-8">
-                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
-                                    <h4 class="text-lg font-semibold">International Certificate Program in Product Management & Marketing</h4>
-                                    <p class="opacity-80 mt-1">Institute of Product Leadership</p>
-                                    <p class="text-sm mt-1">2018 – 2019</p>
+                                <div class="card p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-certificate text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">International Certificate Program</h4>
+                                            <p class="text-text-muted">Institute of Product Leadership</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-text-muted ml-14">Product Management & Marketing, 2018 – 2019</p>
                                 </div>
                             </div>
                         </div>
@@ -1221,40 +1174,52 @@
                             <h3 class="text-xl font-semibold mb-6">Certifications</h3>
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fas fa-certificate text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">Google Analytics</h4>
-                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fas fa-certificate text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">Google Analytics</h4>
+                                        <p class="text-sm text-text-muted">Mar 2023</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fab fa-linkedin text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">LinkedIn Ads</h4>
-                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fab fa-linkedin text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">LinkedIn Ads</h4>
+                                        <p class="text-sm text-text-muted">Mar 2023</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fab fa-facebook text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">Meta Ads</h4>
-                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fab fa-facebook text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">Meta Ads</h4>
+                                        <p class="text-sm text-text-muted">Mar 2023</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fab fa-python text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">Python Django</h4>
-                                    <p class="text-sm opacity-80">Aug 2021</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fab fa-python text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">Python Django</h4>
+                                        <p class="text-sm text-text-muted">Aug 2021</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fab fa-python text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">PCEP Python</h4>
-                                    <p class="text-sm opacity-80">Jul 2021</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fab fa-python text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">PCEP Python</h4>
+                                        <p class="text-sm text-text-muted">Jul 2021</p>
+                                    </div>
                                 </div>
                                 
-                                <div class="p-4 rounded-lg subtle-border">
-                                    <i class="fab fa-google text-teal-400 mb-2"></i>
-                                    <h4 class="font-medium">Google Ads Display</h4>
-                                    <p class="text-sm opacity-80">Jun 2021</p>
+                                <div class="p-4 rounded-lg card flex items-center">
+                                    <i class="fab fa-google text-accent-color mr-3"></i>
+                                    <div>
+                                        <h4 class="font-medium">Google Ads Display</h4>
+                                        <p class="text-sm text-text-muted">Jun 2021</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1270,28 +1235,28 @@
                             <div>
                                 <h3 class="text-xl font-semibold mb-6">Expert Level</h3>
                                 <ul class="space-y-4">
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Photoshop (Image design and manipulation)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Canva (Building social media assets)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Salesforce Cloud (Email marketing)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Phenom (Careers website)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>WordPress (Web development)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>HTML/JavaScript (Web development)</span>
                                     </li>
                                 </ul>
@@ -1300,20 +1265,20 @@
                             <div>
                                 <h3 class="text-xl font-semibold mb-6">Intermediate Level</h3>
                                 <ul class="space-y-4">
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Illustrator (Manipulating vector images)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Adobe XD (Design)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Dreamweaver (Web design)</span>
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
                                         <span>Python/Django (Web development)</span>
                                     </li>
                                 </ul>
@@ -1326,7 +1291,7 @@
     </div>
     
     <!-- Footer area -->
-    <footer class="py-8 px-6 md:px-20 opacity-60 text-center border-t subtle-border">
+    <footer class="py-8 px-6 md:px-20 text-text-muted text-center border-t subtle-border">
         <p>&copy; 2025 Amit Bhalla. All rights reserved.</p>
     </footer>
     
@@ -1421,6 +1386,16 @@
                 }
             });
             
+            // Toggle visibility of summary section based on active tab
+            const summarySection = document.getElementById('summary');
+            if (summarySection) {
+                if (tabName === 'page1') {
+                    summarySection.style.display = 'block';
+                } else {
+                    summarySection.style.display = 'none';
+                }
+            }
+            
             // Update navigation items visibility based on active page
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
@@ -1495,62 +1470,6 @@
                 });
             }, 500);
         });
-        
-        // ====== Custom cursor =======
-        const cursor = document.querySelector('.custom-cursor');
-        const trailContainer = document.getElementById('trail-container');
-        const trailElements = [];
-        const trailCount = 10;
-        
-        // Only enable custom cursor on non-touch devices
-        if (!('ontouchstart' in window) && window.innerWidth > 1024) {
-            cursor.style.display = 'block';
-            
-            // Create trail elements
-            for (let i = 0; i < trailCount; i++) {
-                const trail = document.createElement('div');
-                trail.classList.add('trail');
-                trailContainer.appendChild(trail);
-                trailElements.push(trail);
-            }
-            
-            document.addEventListener('mousemove', (e) => {
-                // Move custom cursor
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                // Update first trail position immediately
-                if (trailElements.length > 0) {
-                    trailElements[0].style.left = e.clientX + 'px';
-                    trailElements[0].style.top = e.clientY + 'px';
-                    trailElements[0].style.opacity = '0.8';
-                }
-            });
-            
-            // Animate trail with delay for each element
-            setInterval(() => {
-                for (let i = trailElements.length - 1; i > 0; i--) {
-                    if (trailElements[i-1].style.opacity !== '') {
-                        trailElements[i].style.left = trailElements[i-1].style.left;
-                        trailElements[i].style.top = trailElements[i-1].style.top;
-                        trailElements[i].style.opacity = (parseFloat(trailElements[i-1].style.opacity) * 0.8).toString();
-                    }
-                }
-            }, 30);
-            
-            // Add active state on interactive elements
-            const interactiveElements = document.querySelectorAll('a, button, .skill-bubble, .nav-item, .experience-card');
-            
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    cursor.classList.add('active');
-                });
-                
-                element.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('active');
-                });
-            });
-        }
         
         // ====== Scroll progress indicator =======
         window.addEventListener('scroll', () => {
