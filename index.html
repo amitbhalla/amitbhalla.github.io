@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Bhalla - Marketing Leader</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #0A192F;
+            --dark-card: #112240;
+            --dark-text: #E0E0E0;
+            --dark-accent: #1ABC9C;
+            --dark-accent-hover: #26C6DA;
+            
+            --light-bg: #EFF8FB;
+            --light-card: #FFFFFF;
+            --light-text: #2C3E50;
+            --light-accent: #1ABC9C;
+            --light-accent-hover: #16A085;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .dark {
+            --bg-color: var(--dark-bg);
+            --card-bg: var(--dark-card);
+            --text-color: var(--dark-text);
+            --accent-color: var(--dark-accent);
+            --accent-hover: var(--dark-accent-hover);
+        }
+        
+        .light {
+            --bg-color: var(--light-bg);
+            --card-bg: var(--light-card);
+            --text-color: var(--light-text);
+            --accent-color: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+        }
+        
+        .resume-bg {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .resume-card {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .resume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .accent-text {
+            color: var(--accent-color);
+        }
+        
+        .accent-bg {
+            background-color: var(--accent-color);
+        }
+        
+        .tab-btn {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .skill-bubble {
+            background-color: rgba(26, 188, 156, 0.15);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-bubble:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -6px;
+            top: 24px;
+        }
+        
+        .timeline-line {
+            width: 2px;
+            height: calc(100% - 24px);
+            background-color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 30px;
+            opacity: 0.3;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+            width: 50px;
+            height: 25px;
+            border-radius: 25px;
+            background-color: var(--card-bg);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-circle {
+            width: 19px;
+            height: 19px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .toggle-circle {
+            transform: translateX(25px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Progress bar for skills */
+        .progress-bar {
+            height: 6px;
+            background-color: rgba(26, 188, 156, 0.15);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Animated underline for headings */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+        
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            
+            .timeline-content {
+                padding-left: 20px;
+            }
+            
+            .timeline-dot {
+                left: -5px;
+                width: 10px;
+                height: 10px;
+            }
+            
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .profile-section {
+                flex-direction: column;
+            }
+            
+            .profile-image {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="resume-bg min-h-screen">
+    <header class="py-6 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold text-lg">AB</div>
+            <div class="ml-4">
+                <h1 class="text-2xl md:text-3xl font-bold">Amit Bhalla</h1>
+                <p class="text-sm opacity-80">Marketing Leader & Strategist</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center space-x-6">
+            <div class="hidden md:flex space-x-2 text-xs">
+                <button class="tab-btn px-2 py-1 active" data-tab="page1">Page 1</button>
+                <span>/</span>
+                <button class="tab-btn px-2 py-1" data-tab="page2">Page 2</button>
+            </div>
+            
+            <div class="theme-toggle" id="themeToggle">
+                <div class="toggle-circle"></div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container mx-auto px-6 md:px-12 pb-20">
+        <!-- Contact Information Section -->
+        <section class="mb-8">
+            <div class="resume-card p-6 rounded-lg">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <div>
+                        <h2 class="text-xl font-semibold mb-2 animated-underline">Contact</h2>
+                        <div class="flex flex-wrap gap-3 mt-4">
+                            <a href="mailto:amit9815@gmail.com" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-envelope"></i>
+                                <span>amit9815@gmail.com</span>
+                            </a>
+                            <a href="tel:+919910776381" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 9910776381</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Professional Summary Section -->
+        <section class="mb-12">
+            <div class="resume-card p-6 rounded-lg">
+                <h2 class="text-xl font-semibold mb-4 animated-underline">Professional Summary</h2>
+                <p class="leading-relaxed">
+                    As a marketing leader with nearly two decades in B2B SaaS, I fuse brand storytelling, market research, and
+                    performance marketing to fuel enterprise growth. My track record spans elevating brand equity (<span class="accent-text font-semibold">35% recall</span>),
+                    increasing pipeline velocity (<span class="accent-text font-semibold">20-30% YoY</span>), and reducing CAC by up to <span class="accent-text font-semibold">50%</span> through disciplined GTM strategies
+                    and customer experience optimization. By embedding operational rigor and a data-driven culture, I also bolster
+                    employer branding and retention (<span class="accent-text font-semibold">15-20% gains</span>) across global organizations.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Experience Tabs -->
+        <div class="flex justify-center md:hidden mb-8">
+            <div class="inline-flex rounded-md shadow-sm">
+                <button class="tab-btn px-4 py-2 text-sm font-medium active" data-tab="page1">Page 1</button>
+                <button class="tab-btn px-4 py-2 text-sm font-medium" data-tab="page2">Page 2</button>
+            </div>
+        </div>
+        
+        <!-- Page 1 Content -->
+        <div id="page1" class="tab-content fade-in">
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-briefcase mr-3 accent-text"></i>
+                    Work Experience
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- VP at Mynd -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Vice President - Strategy & Marketing</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Aug 2024 – Present</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">Mynd Integrated Solutions</p>
+                            <p class="mb-2 font-medium">Part of the CEO's office (currently working as the Head of Marketing and Strategy functions)</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-3">
+                                <li>Leading the Marketing and Strategy functions (Market Research, Insights, Performance Marketing, Employer Branding and Sales Operations)</li>
+                                <li>Rebuilding the digital identity for the brand (Website, social media, campaigns, etc.)</li>
+                                <li>Helping LOBs build their growth roadmaps for the next 3 years (Providing market insights, feature roadmap, TAM/ SAM and Sales Pitch Refinement</li>
+                                <li>Building roadmap to pave way for external investments (IPO readiness)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing Director at BCG -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Marketing Director</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2024 – Aug 2024</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
+                            <p class="mb-2 font-medium">Head of Employer Brand for BCG in Asia Pacific</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-3">
+                                <li>Developed BCG's talent attraction framework (in AP), the basis of our marketing strategy, resulting high applications (conversions) and improving our diversity (DEI) slate</li>
+                                <li>Co-developed BCG's current recruiting campaign, "Beyond is where we begin"; part of the core team and owned the Asia Pacific perspective, development, and campaign activation</li>
+                                <li>Leading the employer branding team, which designs and executes omnichannel marketing strategies to build, attract, and nurture high-potential talent</li>
+                                <li>Reduced recruiting costs, Time to hire. Improved engagement rates across social. Enhanced careers website footfall for all Asia Pacific countries. Improved Team NPS by 20 points. Solidified talent pipelines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Senior Marketing Manager at BCG -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Senior Marketing Manager</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Nov 2022 – Dec 2023</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
+                            <p class="italic mb-3">1 year 2 months</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Created the marketing and employer branding strategy for the 12 countries under my purview.</li>
+                                <li>Introduced talent attraction and employer branding to BCG's Asia Pacific recruiting function.</li>
+                                <li>Took over all our social media (AP) and digital platforms (LinkedIn, Meta, careers website, job boards, etc.)</li>
+                                <li>Focused on enhancing brand value, reducing hiring costs and building out candidate pipelines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Marketing Manager at BCG -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Product Marketing Manager</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2019 – Oct 2022</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
+                            <p class="italic mb-3">3 years 10 months</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Developed and executed product marketing strategies for BCG B2B solutions (Lighthouse, KEY, OrgBuilder, etc.), contributing to an increase in product adoption and revenue growth.</li>
+                                <li>Spearheaded the launch of two B2B products, driving initial sales through targeted go-to-market strategies and robust client engagement initiatives.</li>
+                                <li>Collaborated with cross-functional teams (Sales, Product Development, and Customer Success) to ensure alignment on product messaging and positioning.</li>
+                                <li>Managed end-to-end marketing campaigns, from market research, market segmentation, competitive analysis, and content creation. Achieved a significant increase in MQLs (Marketing Qualified Leads).</li>
+                                <li>Leveraged data analytics to track and optimize marketing performance, improving campaign ROI.</li>
+                                <li>Conducted comprehensive market segmentation and targeted key accounts, resulting in an increase in customer acquisition and retention rates.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing Lead at BCG -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Marketing Lead</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">May 2014 – Dec 2018</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
+                            <p class="italic mb-3">4 years 8 months</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Led the development and execution of comprehensive communication and PR strategies to enhance BCG's brand reputation and visibility in the B2B sector.</li>
+                                <li>Managed media relations, securing coverage in top-tier industry publications and achieving an increase in positive media mentions.</li>
+                                <li>Developed crisis communication plans and managed PR crises, effectively mitigating negative publicity and maintaining brand integrity.</li>
+                                <li>Created and distributed press releases, white papers, and thought leadership content, positioning BCG as a leader in the consulting industry.</li>
+                                <li>Organized and promoted high-profile events, webinars, and speaking engagements, driving engagement and brand awareness among key stakeholders.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Page 2 Content -->
+        <div id="page2" class="tab-content hidden fade-in">
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-briefcase mr-3 accent-text"></i>
+                    Earlier Work Experience
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- Senior Analyst at McKinsey -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Senior Analyst</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Jul 2012 – Apr 2014</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
+                            <p class="italic mb-3">1 year 10 months</p>
+                            <p>I worked on Product Marketing and management for the Digital Benchmarking Solution (McKBench). Executed a comprehensive marketing and sales strategy to effectively communicate the platform's value to stakeholders. Managed the brand for the benchmarking platform, ensuring a consistent and compelling image across all channels and touchpoints.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Analyst at McKinsey -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Analyst</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Jul 2009 – Jun 2012</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
+                            <p class="italic mb-3">3 years</p>
+                            <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Junior Analyst at McKinsey -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Junior Analyst</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Oct 2008 – Jun 2009</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
+                            <p class="italic mb-3">9 months</p>
+                            <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- MIS Executive at HCLTech -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">MIS Executive</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2007 – Sep 2008</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">HCLTech</p>
+                            <p class="italic mb-3">1 year 9 months</p>
+                            <p>Responsible for client reporting on call data originating from agents who answered technical queries over the phone. Focused on building business reports that supported decision-making, capturing metrics such as AHT (Average Handle Time) and FCR (First Call Resolution). To achieve this, I developed reports in Excel and VBA.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing Executive at SBI MUTUAL FUND -->
+                    <div class="resume-card p-6 rounded-lg relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content pl-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
+                                <h3 class="text-lg md:text-xl font-semibold">Marketing Executive</h3>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="skill-bubble px-3 py-1 rounded-full">Apr 2003 – Mar 2005</span>
+                                </div>
+                            </div>
+                            <p class="text-lg mb-4 opacity-90">SBI MUTUAL FUND</p>
+                            <p class="italic mb-3">2 years</p>
+                            <p>Reinvigorated the agent sales network and directly sold Mutual Funds. Built a network of local agents to sell Mutual Funds to local consumers. Set up the office of SBI Mutual Funds in Shimla from the ground up. Leveraged the bank's network to bring in corporate customers for Mutual Funds. Lastly, I provided direct sales services to walk-in customers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills, Education, and Certifications -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Skills Section -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-cogs mr-3 accent-text"></i>
+                        Skills
+                    </h2>
+                    
+                    <div class="resume-card p-6 rounded-lg">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Marketing</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Branding</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Employer Branding</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Product Marketing</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Communications & PR</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Social Media</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Digital Marketing</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Market Research</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">B2B Products</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Strategy</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Leadership</div>
+                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Stakeholder Management</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Certifications Section -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-certificate mr-3 accent-text"></i>
+                        Certifications
+                    </h2>
+                    
+                    <div class="resume-card p-6 rounded-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>Google Analytics Certification (Mar 2023)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>LinkedIn Ads (Mar 2023)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>Meta Instagram and Facebook Ads (Mar 2023)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>Python Django (Aug 2021)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>PCEP Python Programer (Jul 2021)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>Google Ads Display (Jun 2021)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
+                                <span>Professional Scrum Master-1 (Mar 2018)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Education Section -->
+            <section class="mt-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-graduation-cap mr-3 accent-text"></i>
+                    Education
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="resume-card p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Master of Business Administration (MBA)</h3>
+                        <p class="mb-1">Dual Major (Marketing & Finance)</p>
+                        <p class="text-sm">I.K. Gujral Punjab Technical University (Jalandhar)</p>
+                        <p class="text-sm mt-2">2005 – 2007</p>
+                    </div>
+                    
+                    <div class="resume-card p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Bachelor of Business Administration (BBA)</h3>
+                        <p class="text-sm">Punjab University (Chandigarh)</p>
+                        <p class="text-sm mt-2">2003 – 2005</p>
+                    </div>
+                    
+                    <div class="resume-card p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">International Certificate Program in Product Management & Marketing (ICPM)</h3>
+                        <p class="text-sm">Institute of Product Leadership</p>
+                        <p class="text-sm mt-2">2018 – 2019</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Marketing Tools Section -->
+            <section class="mt-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-tools mr-3 accent-text"></i>
+                    Marketing Tools
+                </h2>
+                
+                <div class="resume-card p-6 rounded-lg">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3">Expert in</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Photoshop (Image design and manipulation)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Canva (Building social media assets)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Salesforce Cloud (Email marketing)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Phenom (Careers website)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    WordPress (Web development)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    HTML/JavaScript (Web development)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Intermediate in</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Illustrator (Manipulating vector images)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Adobe XD (Design)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Dreamweaver (Web design)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 flex items-center">
+                                    <i class="fas fa-check accent-text mr-2"></i>
+                                    Python/Django (Web development)
+                                </p>
+                                <div class="progress-bar mt-1">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <footer class="py-6 px-6 md:px-12 opacity-80 text-sm text-center mt-12">
+        <p>© 2025 Amit Bhalla. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and hide all contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Add active class to clicked button and show corresponding content
+                button.classList.add('active');
+                document.getElementById(tabName).classList.remove('hidden');
+                
+                // Add fade-in animation
+                document.getElementById(tabName).classList.add('fade-in');
+                
+                // Remove fade-in class after animation completes
+                setTimeout(() => {
+                    document.getElementById(tabName).classList.remove('fade-in');
+                }, 600);
+            });
+        });
+        
+        // Initialize progress bars with animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            
+            setTimeout(() => {
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+        
+        // Apply saved theme preference or use default (dark)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+        }
+        
+        // Add hover effect for cards on mobile (touch)
+        const resumeCards = document.querySelectorAll('.resume-card');
+        resumeCards.forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.classList.add('hover');
+            }, { passive: true });
+            
+            card.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    card.classList.remove('hover');
+                }, 300);
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
