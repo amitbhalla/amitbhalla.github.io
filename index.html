@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amit Bhalla - Marketing Leader</title>
+    <title>Amit Bhalla - Marketing Strategist</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
+        /* Core variables */
         :root {
+            /* Dark mode */
             --dark-bg: #0A192F;
             --dark-card: #112240;
             --dark-text: #E0E0E0;
             --dark-accent: #1ABC9C;
             --dark-accent-hover: #26C6DA;
             
+            /* Light mode */
             --light-bg: #EFF8FB;
             --light-card: #FFFFFF;
             --light-text: #2C3E50;
             --light-accent: #1ABC9C;
             --light-accent-hover: #16A085;
+            
+            /* Common */
+            --transition-speed: 0.5s;
+            --border-radius: 16px;
+            --shadow: 0 20px 80px -20px rgba(0, 0, 0, 0.2);
+            
+            /* Smooth scrolling for the entire page */
+            scroll-behavior: smooth;
         }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-        }
-        
+        /* Base Theme Setup */
         .dark {
             --bg-color: var(--dark-bg);
             --card-bg: var(--dark-card);
             --text-color: var(--dark-text);
             --accent-color: var(--dark-accent);
             --accent-hover: var(--dark-accent-hover);
+            --glow-color: rgba(38, 198, 218, 0.5);
+            --border-color: rgba(38, 198, 218, 0.2);
+            --glass-bg: rgba(17, 34, 64, 0.6);
+            --scroll-thumb: var(--dark-accent);
+            --surface-bg: rgba(17, 34, 64, 0.8);
         }
         
         .light {
@@ -45,764 +55,1285 @@
             --text-color: var(--light-text);
             --accent-color: var(--light-accent);
             --accent-hover: var(--light-accent-hover);
-        }
-        
-        .resume-bg {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-        
-        .resume-card {
-            background-color: var(--card-bg);
-            border-left: 4px solid var(--accent-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .resume-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .accent-text {
-            color: var(--accent-color);
-        }
-        
-        .accent-bg {
-            background-color: var(--accent-color);
-        }
-        
-        .tab-btn {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-        
-        .tab-btn.active {
-            border-bottom: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-        
-        .skill-bubble {
-            background-color: rgba(26, 188, 156, 0.15);
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            transition: all 0.3s ease;
-        }
-        
-        .skill-bubble:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            position: absolute;
-            left: -6px;
-            top: 24px;
-        }
-        
-        .timeline-line {
-            width: 2px;
-            height: calc(100% - 24px);
-            background-color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            top: 30px;
-            opacity: 0.3;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .theme-toggle {
-            cursor: pointer;
-            width: 50px;
-            height: 25px;
-            border-radius: 25px;
-            background-color: var(--card-bg);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-circle {
-            width: 19px;
-            height: 19px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            transition: all 0.3s ease;
-        }
-        
-        .dark .toggle-circle {
-            transform: translateX(25px);
+            --glow-color: rgba(22, 160, 133, 0.1);
+            --border-color: rgba(22, 160, 133, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --scroll-thumb: var(--light-accent);
+            --surface-bg: rgba(255, 255, 255, 0.95);
         }
 
-        /* Custom scrollbar */
+        /* Global Styles */
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            overflow-x: hidden;
+            background-image: radial-gradient(
+                circle at 10% 20%, 
+                rgba(26, 188, 156, 0.03) 0%, 
+                transparent 40%
+            ), 
+            radial-gradient(
+                circle at 90% 80%, 
+                rgba(38, 198, 218, 0.03) 0%, 
+                transparent 40%
+            );
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
+            height: 6px;
         }
         
         ::-webkit-scrollbar-track {
-            background: var(--bg-color);
+            background: transparent;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 4px;
+            background: var(--scroll-thumb);
+            border-radius: 50px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-hover);
         }
-        
-        /* Progress bar for skills */
-        .progress-bar {
-            height: 6px;
-            background-color: rgba(26, 188, 156, 0.15);
-            border-radius: 3px;
-            overflow: hidden;
+
+        /* Glassmorphism Elements */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
         }
         
-        .progress-fill {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 3px;
-            transition: width 1s ease-in-out;
+        /* Layout Components */
+        .navigation-rail {
+            background: var(--surface-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            transition: all var(--transition-speed);
+            z-index: 100;
         }
         
-        /* Animated underline for headings */
-        .animated-underline {
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-color);
+            z-index: 1000;
+            clip-path: circle(0px at 92% 8%);
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .mobile-menu.active {
+            clip-path: circle(150% at 92% 8%);
+        }
+        
+        /* Card Components */
+        .experience-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
             position: relative;
-            display: inline-block;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
         
-        .animated-underline::after {
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .experience-card:hover::after {
+            opacity: 1;
+        }
+        
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, var(--glow-color), transparent 70%);
+            border-radius: var(--border-radius);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        /* Interactive Elements */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+        
+        .nav-item.active {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+        
+        .nav-item::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -2px;
+            bottom: -4px;
             left: 0;
-            background-color: var(--accent-color);
+            background: var(--accent-color);
             transition: width 0.3s ease;
         }
         
-        .animated-underline:hover::after {
+        .nav-item:hover::after,
+        .nav-item.active::after {
             width: 100%;
         }
         
-        /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
+        .skill-bubble {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(26, 188, 156, 0.1);
+            color: var(--accent-color);
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        .skill-bubble:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--glow-color);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(to right, #0A192F, #26C6DA);
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            box-sizing: border-box;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .light .theme-toggle {
+            background: linear-gradient(to right, #EFF8FB, #1ABC9C);
+        }
+        
+        .theme-toggle i {
+            font-size: 14px;
+            color: white;
+            z-index: 1;
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light .theme-toggle::after {
+            transform: translateX(30px);
+        }
+        
+        /* Progress indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        /* Special Elements */
+        .highlight-text {
+            position: relative;
+            display: inline;
+            color: var(--accent-color);
+            z-index: 1;
+        }
+        
+        .highlight-text::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 2px;
+            left: 0;
+            background: var(--accent-color);
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .orbit-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        
+        .skill-orbit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed var(--border-color);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .skill-orbit:nth-child(1) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        
+        .skill-orbit:nth-child(2) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation-duration: 20s;
+        }
+        
+        .skill-planet {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform-origin: center;
+            animation: counter-rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes counter-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        
+        /* Timeline Component */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -39px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid var(--bg-color);
+            z-index: 1;
+        }
+        
+        /* Animated sections */
+        .fade-up {
+            opacity: 1; /* Changed from 0 to ensure content is visible by default */
+            transform: translateY(0); /* Reset transform to ensure visibility */
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Skill chart */
+        .skill-chart {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 3px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Tab System */
+        .tab-indicator {
+            position: absolute;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 50px;
+            z-index: -1;
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(26, 188, 156, 0.2);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: none;
+        }
+        
+        .custom-cursor.active {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 188, 156, 0.3);
+        }
+        
+        /* Certifications list */
+        .cert-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .cert-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        
+        /* Utility classes */
+        .text-gradient {
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--glow-color);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--glow-color);
+        }
+        
+        .subtle-border {
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navigation-rail {
+                display: none;
             }
             
-            .timeline-content {
-                padding-left: 20px;
+            .main-content {
+                margin-left: 0;
+                padding: 0 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .experience-card {
+                padding: 1.25rem;
+            }
+            
+            .timeline {
+                padding-left: 25px;
             }
             
             .timeline-dot {
-                left: -5px;
-                width: 10px;
-                height: 10px;
+                left: -34px;
+                width: 14px;
+                height: 14px;
             }
             
-            .skill-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .header-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                justify-content: flex-start;
+                margin-top: 1rem;
             }
         }
         
         @media (max-width: 640px) {
-            .profile-section {
-                flex-direction: column;
+            .custom-cursor {
+                display: none !important;
             }
             
-            .profile-image {
-                margin-right: 0;
-                margin-bottom: 1rem;
+            .skill-orbit, .skill-planet {
+                display: none;
             }
             
-            .skill-grid {
-                grid-template-columns: 1fr;
+            .btn-primary, .btn-outline {
+                padding: 0.5rem 1rem;
             }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Page specific styles */
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+        }
+        
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        
+        /* Mouse trail effect */
+        .trail {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.2s;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
-<body class="resume-bg min-h-screen">
-    <header class="py-6 px-6 md:px-12 flex justify-between items-center">
-        <div class="flex items-center">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold text-lg">AB</div>
-            <div class="ml-4">
-                <h1 class="text-2xl md:text-3xl font-bold">Amit Bhalla</h1>
-                <p class="text-sm opacity-80">Marketing Leader & Strategist</p>
-            </div>
-        </div>
-        
-        <div class="flex items-center space-x-6">
-            <div class="hidden md:flex space-x-2 text-xs">
-                <button class="tab-btn px-2 py-1 active" data-tab="page1">Page 1</button>
-                <span>/</span>
-                <button class="tab-btn px-2 py-1" data-tab="page2">Page 2</button>
-            </div>
-            
-            <div class="theme-toggle" id="themeToggle">
-                <div class="toggle-circle"></div>
-            </div>
-        </div>
-    </header>
+<body>
+    <!-- Mouse cursor effects -->
+    <div class="custom-cursor"></div>
+    <div id="trail-container"></div>
     
-    <div class="container mx-auto px-6 md:px-12 pb-20">
-        <!-- Contact Information Section -->
-        <section class="mb-8">
-            <div class="resume-card p-6 rounded-lg">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                    <div>
-                        <h2 class="text-xl font-semibold mb-2 animated-underline">Contact</h2>
-                        <div class="flex flex-wrap gap-3 mt-4">
-                            <a href="mailto:amit9815@gmail.com" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
-                                <i class="fas fa-envelope"></i>
-                                <span>amit9815@gmail.com</span>
-                            </a>
-                            <a href="tel:+919910776381" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
-                                <i class="fas fa-phone"></i>
-                                <span>+91 9910776381</span>
-                            </a>
-                            <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="flex items-center space-x-2 skill-bubble px-3 py-1 rounded-full text-sm">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Progress indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="scrollProgress"></div>
+    </div>
+    
+    <!-- Mobile navigation -->
+    <div class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 glass md:hidden">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold">
+                AB
             </div>
-        </section>
-        
-        <!-- Professional Summary Section -->
-        <section class="mb-12">
-            <div class="resume-card p-6 rounded-lg">
-                <h2 class="text-xl font-semibold mb-4 animated-underline">Professional Summary</h2>
-                <p class="leading-relaxed">
-                    As a marketing leader with nearly two decades in B2B SaaS, I fuse brand storytelling, market research, and
-                    performance marketing to fuel enterprise growth. My track record spans elevating brand equity (<span class="accent-text font-semibold">35% recall</span>),
-                    increasing pipeline velocity (<span class="accent-text font-semibold">20-30% YoY</span>), and reducing CAC by up to <span class="accent-text font-semibold">50%</span> through disciplined GTM strategies
-                    and customer experience optimization. By embedding operational rigor and a data-driven culture, I also bolster
-                    employer branding and retention (<span class="accent-text font-semibold">15-20% gains</span>) across global organizations.
-                </p>
-            </div>
-        </section>
-        
-        <!-- Experience Tabs -->
-        <div class="flex justify-center md:hidden mb-8">
-            <div class="inline-flex rounded-md shadow-sm">
-                <button class="tab-btn px-4 py-2 text-sm font-medium active" data-tab="page1">Page 1</button>
-                <button class="tab-btn px-4 py-2 text-sm font-medium" data-tab="page2">Page 2</button>
-            </div>
+            <span class="font-semibold text-lg">Amit Bhalla</span>
         </div>
-        
-        <!-- Page 1 Content -->
-        <div id="page1" class="tab-content fade-in">
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-briefcase mr-3 accent-text"></i>
-                    Work Experience
-                </h2>
-                
-                <div class="space-y-8">
-                    <!-- VP at Mynd -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Vice President - Strategy & Marketing</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Aug 2024 – Present</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">Mynd Integrated Solutions</p>
-                            <p class="mb-2 font-medium">Part of the CEO's office (currently working as the Head of Marketing and Strategy functions)</p>
-                            <ul class="list-disc pl-5 space-y-2 mt-3">
-                                <li>Leading the Marketing and Strategy functions (Market Research, Insights, Performance Marketing, Employer Branding and Sales Operations)</li>
-                                <li>Rebuilding the digital identity for the brand (Website, social media, campaigns, etc.)</li>
-                                <li>Helping LOBs build their growth roadmaps for the next 3 years (Providing market insights, feature roadmap, TAM/ SAM and Sales Pitch Refinement</li>
-                                <li>Building roadmap to pave way for external investments (IPO readiness)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Marketing Director at BCG -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Marketing Director</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2024 – Aug 2024</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
-                            <p class="mb-2 font-medium">Head of Employer Brand for BCG in Asia Pacific</p>
-                            <ul class="list-disc pl-5 space-y-2 mt-3">
-                                <li>Developed BCG's talent attraction framework (in AP), the basis of our marketing strategy, resulting high applications (conversions) and improving our diversity (DEI) slate</li>
-                                <li>Co-developed BCG's current recruiting campaign, "Beyond is where we begin"; part of the core team and owned the Asia Pacific perspective, development, and campaign activation</li>
-                                <li>Leading the employer branding team, which designs and executes omnichannel marketing strategies to build, attract, and nurture high-potential talent</li>
-                                <li>Reduced recruiting costs, Time to hire. Improved engagement rates across social. Enhanced careers website footfall for all Asia Pacific countries. Improved Team NPS by 20 points. Solidified talent pipelines.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Senior Marketing Manager at BCG -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Senior Marketing Manager</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Nov 2022 – Dec 2023</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
-                            <p class="italic mb-3">1 year 2 months</p>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Created the marketing and employer branding strategy for the 12 countries under my purview.</li>
-                                <li>Introduced talent attraction and employer branding to BCG's Asia Pacific recruiting function.</li>
-                                <li>Took over all our social media (AP) and digital platforms (LinkedIn, Meta, careers website, job boards, etc.)</li>
-                                <li>Focused on enhancing brand value, reducing hiring costs and building out candidate pipelines.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Product Marketing Manager at BCG -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Product Marketing Manager</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2019 – Oct 2022</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
-                            <p class="italic mb-3">3 years 10 months</p>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Developed and executed product marketing strategies for BCG B2B solutions (Lighthouse, KEY, OrgBuilder, etc.), contributing to an increase in product adoption and revenue growth.</li>
-                                <li>Spearheaded the launch of two B2B products, driving initial sales through targeted go-to-market strategies and robust client engagement initiatives.</li>
-                                <li>Collaborated with cross-functional teams (Sales, Product Development, and Customer Success) to ensure alignment on product messaging and positioning.</li>
-                                <li>Managed end-to-end marketing campaigns, from market research, market segmentation, competitive analysis, and content creation. Achieved a significant increase in MQLs (Marketing Qualified Leads).</li>
-                                <li>Leveraged data analytics to track and optimize marketing performance, improving campaign ROI.</li>
-                                <li>Conducted comprehensive market segmentation and targeted key accounts, resulting in an increase in customer acquisition and retention rates.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Marketing Lead at BCG -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Marketing Lead</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">May 2014 – Dec 2018</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">Boston Consulting Group (BCG)</p>
-                            <p class="italic mb-3">4 years 8 months</p>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Led the development and execution of comprehensive communication and PR strategies to enhance BCG's brand reputation and visibility in the B2B sector.</li>
-                                <li>Managed media relations, securing coverage in top-tier industry publications and achieving an increase in positive media mentions.</li>
-                                <li>Developed crisis communication plans and managed PR crises, effectively mitigating negative publicity and maintaining brand integrity.</li>
-                                <li>Created and distributed press releases, white papers, and thought leadership content, positioning BCG as a leader in the consulting industry.</li>
-                                <li>Organized and promoted high-profile events, webinars, and speaking engagements, driving engagement and brand awareness among key stakeholders.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Page 2 Content -->
-        <div id="page2" class="tab-content hidden fade-in">
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-briefcase mr-3 accent-text"></i>
-                    Earlier Work Experience
-                </h2>
-                
-                <div class="space-y-8">
-                    <!-- Senior Analyst at McKinsey -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Senior Analyst</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Jul 2012 – Apr 2014</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
-                            <p class="italic mb-3">1 year 10 months</p>
-                            <p>I worked on Product Marketing and management for the Digital Benchmarking Solution (McKBench). Executed a comprehensive marketing and sales strategy to effectively communicate the platform's value to stakeholders. Managed the brand for the benchmarking platform, ensuring a consistent and compelling image across all channels and touchpoints.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Analyst at McKinsey -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Analyst</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Jul 2009 – Jun 2012</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
-                            <p class="italic mb-3">3 years</p>
-                            <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Junior Analyst at McKinsey -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Junior Analyst</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Oct 2008 – Jun 2009</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">McKinsey & Company</p>
-                            <p class="italic mb-3">9 months</p>
-                            <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- MIS Executive at HCLTech -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">MIS Executive</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Jan 2007 – Sep 2008</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">HCLTech</p>
-                            <p class="italic mb-3">1 year 9 months</p>
-                            <p>Responsible for client reporting on call data originating from agents who answered technical queries over the phone. Focused on building business reports that supported decision-making, capturing metrics such as AHT (Average Handle Time) and FCR (First Call Resolution). To achieve this, I developed reports in Excel and VBA.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Marketing Executive at SBI MUTUAL FUND -->
-                    <div class="resume-card p-6 rounded-lg relative">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content pl-6">
-                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-2">
-                                <h3 class="text-lg md:text-xl font-semibold">Marketing Executive</h3>
-                                <div class="flex items-center space-x-2 text-sm">
-                                    <span class="skill-bubble px-3 py-1 rounded-full">Apr 2003 – Mar 2005</span>
-                                </div>
-                            </div>
-                            <p class="text-lg mb-4 opacity-90">SBI MUTUAL FUND</p>
-                            <p class="italic mb-3">2 years</p>
-                            <p>Reinvigorated the agent sales network and directly sold Mutual Funds. Built a network of local agents to sell Mutual Funds to local consumers. Set up the office of SBI Mutual Funds in Shimla from the ground up. Leveraged the bank's network to bring in corporate customers for Mutual Funds. Lastly, I provided direct sales services to walk-in customers.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Skills, Education, and Certifications -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Skills Section -->
-                <section>
-                    <h2 class="text-2xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-cogs mr-3 accent-text"></i>
-                        Skills
-                    </h2>
-                    
-                    <div class="resume-card p-6 rounded-lg">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Marketing</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Branding</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Employer Branding</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Product Marketing</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Communications & PR</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Social Media</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Digital Marketing</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Market Research</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">B2B Products</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Strategy</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Leadership</div>
-                            <div class="skill-bubble px-3 py-2 rounded-full text-sm text-center">Stakeholder Management</div>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- Certifications Section -->
-                <section>
-                    <h2 class="text-2xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-certificate mr-3 accent-text"></i>
-                        Certifications
-                    </h2>
-                    
-                    <div class="resume-card p-6 rounded-lg">
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>Google Analytics Certification (Mar 2023)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>LinkedIn Ads (Mar 2023)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>Meta Instagram and Facebook Ads (Mar 2023)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>Python Django (Aug 2021)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>PCEP Python Programer (Jul 2021)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>Google Ads Display (Jun 2021)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="w-2 h-2 rounded-full accent-bg mr-2"></div>
-                                <span>Professional Scrum Master-1 (Mar 2018)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
+        <div class="flex items-center space-x-4">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
             </div>
-            
-            <!-- Education Section -->
-            <section class="mt-8">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-graduation-cap mr-3 accent-text"></i>
-                    Education
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="resume-card p-6 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">Master of Business Administration (MBA)</h3>
-                        <p class="mb-1">Dual Major (Marketing & Finance)</p>
-                        <p class="text-sm">I.K. Gujral Punjab Technical University (Jalandhar)</p>
-                        <p class="text-sm mt-2">2005 – 2007</p>
-                    </div>
-                    
-                    <div class="resume-card p-6 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">Bachelor of Business Administration (BBA)</h3>
-                        <p class="text-sm">Punjab University (Chandigarh)</p>
-                        <p class="text-sm mt-2">2003 – 2005</p>
-                    </div>
-                    
-                    <div class="resume-card p-6 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">International Certificate Program in Product Management & Marketing (ICPM)</h3>
-                        <p class="text-sm">Institute of Product Leadership</p>
-                        <p class="text-sm mt-2">2018 – 2019</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Marketing Tools Section -->
-            <section class="mt-8">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-tools mr-3 accent-text"></i>
-                    Marketing Tools
-                </h2>
-                
-                <div class="resume-card p-6 rounded-lg">
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3">Expert in</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Photoshop (Image design and manipulation)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 95%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Canva (Building social media assets)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Salesforce Cloud (Email marketing)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Phenom (Careers website)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    WordPress (Web development)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    HTML/JavaScript (Web development)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-semibold mb-3">Intermediate in</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Illustrator (Manipulating vector images)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 65%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Adobe XD (Design)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 70%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Dreamweaver (Web design)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 60%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="mb-1 flex items-center">
-                                    <i class="fas fa-check accent-text mr-2"></i>
-                                    Python/Django (Web development)
-                                </p>
-                                <div class="progress-bar mt-1">
-                                    <div class="progress-fill" style="width: 75%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <button id="mobileMenuToggle" class="p-2">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
     </div>
     
-    <footer class="py-6 px-6 md:px-12 opacity-80 text-sm text-center mt-12">
-        <p>© 2025 Amit Bhalla. All rights reserved.</p>
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu py-20 px-8">
+        <div class="flex justify-end mb-8">
+            <button id="closeMenu" class="p-2">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white text-3xl font-bold">
+                AB
+            </div>
+            <h2 class="text-2xl font-bold">Amit Bhalla</h2>
+            <p class="text-center opacity-80">Marketing Leader & Strategist</p>
+            
+            <div class="w-full mt-8">
+                <div class="flex justify-center mb-8">
+                    <div class="inline-flex p-1 rounded-full subtle-border relative">
+                        <div class="tab-indicator"></div>
+                        <button data-tab="page1" class="mobile-tab-btn px-5 py-2 rounded-full z-10 font-medium text-sm active">Page 1</button>
+                        <button data-tab="page2" class="mobile-tab-btn px-5 py-2 rounded-full z-10 font-medium text-sm">Page 2</button>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 text-center">
+                    <a href="mailto:amit9815@gmail.com" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                        <i class="fas fa-envelope"></i>
+                        <span>amit9815@gmail.com</span>
+                    </a>
+                    <a href="tel:+919910776381" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 9910776381</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Desktop navigation rail -->
+    <div class="navigation-rail fixed top-0 left-0 h-screen w-20 flex flex-col items-center py-8 hidden md:flex">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 flex items-center justify-center text-white font-bold mb-8">
+            AB
+        </div>
+        
+        <div class="flex flex-col items-center space-y-8 mt-8">
+            <a href="#summary" class="nav-item active" data-page="all">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+            <a href="#experience" class="nav-item" data-page="page1">
+                <i class="fas fa-briefcase text-xl"></i>
+            </a>
+            <a href="#skills" class="nav-item" data-page="page2">
+                <i class="fas fa-chart-pie text-xl"></i>
+            </a>
+            <a href="#education" class="nav-item" data-page="page2">
+                <i class="fas fa-graduation-cap text-xl"></i>
+            </a>
+        </div>
+        
+        <div class="mt-auto">
+            <div class="theme-toggle" id="desktopThemeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="main-content ml-0 md:ml-20 pt-20 md:pt-0">
+        <!-- Header area -->
+        <header class="pt-8 md:pt-12 px-6 md:px-20 pb-4 md:pb-12">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient">Amit Bhalla</h1>
+                    <p class="text-xl md:text-2xl opacity-80">Marketing Leader & B2B SaaS Strategist</p>
+                </div>
+                
+                <div class="mt-6 md:mt-0">
+                    <div class="hidden md:flex p-1 rounded-full subtle-border relative">
+                        <div class="tab-indicator"></div>
+                        <button data-tab="page1" class="desktop-tab-btn px-5 py-2 rounded-full z-10 font-medium active">Page 1</button>
+                        <button data-tab="page2" class="desktop-tab-btn px-5 py-2 rounded-full z-10 font-medium">Page 2</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between md:items-center mt-8 pb-6 border-b subtle-border">
+                <div class="flex flex-wrap gap-3">
+                    <a href="mailto:amit9815@gmail.com" class="skill-bubble">
+                        <i class="fas fa-envelope mr-2"></i>
+                        amit9815@gmail.com
+                    </a>
+                    <a href="tel:+919910776381" class="skill-bubble">
+                        <i class="fas fa-phone mr-2"></i>
+                        +91 9910776381
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhalla-amit/" target="_blank" class="skill-bubble">
+                        <i class="fab fa-linkedin mr-2"></i>
+                        LinkedIn
+                    </a>
+                </div>
+                
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Summary section -->
+        <section id="summary" class="px-6 md:px-20 py-12">
+            <div class="experience-card mb-12 fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6">Professional Summary</h2>
+                <p class="text-lg leading-relaxed">
+                    As a marketing leader with nearly two decades in B2B SaaS, I fuse brand storytelling, market research, and
+                    performance marketing to fuel enterprise growth. My track record spans elevating brand equity (<span class="highlight-text">35% recall</span>),
+                    increasing pipeline velocity (<span class="highlight-text">20-30% YoY</span>), and reducing CAC by up to <span class="highlight-text">50%</span> through disciplined GTM strategies
+                    and customer experience optimization. By embedding operational rigor and a data-driven culture, I also bolster
+                    employer branding and retention (<span class="highlight-text">15-20% gains</span>) across global organizations.
+                </p>
+            </div>
+            
+            <!-- Metrics showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
+                <div class="experience-card text-center py-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">35%</div>
+                    <p class="text-lg opacity-80">Brand Recall Increase</p>
+                </div>
+                <div class="experience-card text-center py-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">50%</div>
+                    <p class="text-lg opacity-80">CAC Reduction</p>
+                </div>
+                <div class="experience-card text-center py-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">20%+</div>
+                    <p class="text-lg opacity-80">Pipeline Velocity Increase</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tabbed content wrapper -->
+        <div class="px-6 md:px-20 pb-20">
+            <!-- Page 1 Content -->
+            <div id="page1-content" class="page-content active">
+                <!-- Experience section -->
+                <section id="experience" class="py-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade-up">Work Experience</h2>
+                    
+                    <div class="timeline">
+                        <!-- VP at Mynd -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Vice President - Strategy & Marketing</h3>
+                                        <p class="text-lg opacity-80 mt-1">Mynd Integrated Solutions</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Aug 2024 – Present</span>
+                                    </div>
+                                </div>
+                                <p class="mb-4">Part of the CEO's office (currently working as the Head of Marketing and Strategy functions)</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Leading the Marketing and Strategy functions (Market Research, Insights, Performance Marketing, Employer Branding and Sales Operations)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Rebuilding the digital identity for the brand (Website, social media, campaigns, etc.)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Helping LOBs build their growth roadmaps for the next 3 years (Providing market insights, feature roadmap, TAM/ SAM and Sales Pitch Refinement</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Building roadmap to pave way for external investments (IPO readiness)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Marketing Director at BCG -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Marketing Director</h3>
+                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Jan 2024 – Aug 2024</span>
+                                    </div>
+                                </div>
+                                <p class="mb-4">Head of Employer Brand for BCG in Asia Pacific</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Developed BCG's talent attraction framework (in AP), the basis of our marketing strategy, resulting high applications (conversions) and improving our diversity (DEI) slate</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Co-developed BCG's current recruiting campaign, "Beyond is where we begin"; part of the core team and owned the Asia Pacific perspective, development, and campaign activation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Leading the employer branding team, which designs and executes omnichannel marketing strategies to build, attract, and nurture high-potential talent</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Reduced recruiting costs, Time to hire. Improved engagement rates across social. Enhanced careers website footfall for all Asia Pacific countries. Improved Team NPS by 20 points. Solidified talent pipelines.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Senior Marketing Manager at BCG -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Senior Marketing Manager</h3>
+                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Nov 2022 – Dec 2023</span>
+                                    </div>
+                                </div>
+                                <p class="opacity-70 mb-4 italic">1 year 2 months</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Created the marketing and employer branding strategy for the 12 countries under my purview.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Introduced talent attraction and employer branding to BCG's Asia Pacific recruiting function.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Took over all our social media (AP) and digital platforms (LinkedIn, Meta, careers website, job boards, etc.)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Focused on enhancing brand value, reducing hiring costs and building out candidate pipelines.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Marketing Manager at BCG -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Product Marketing Manager</h3>
+                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Jan 2019 – Oct 2022</span>
+                                    </div>
+                                </div>
+                                <p class="opacity-70 mb-4 italic">3 years 10 months</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Developed and executed product marketing strategies for BCG B2B solutions (Lighthouse, KEY, OrgBuilder, etc.), contributing to an increase in product adoption and revenue growth.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Spearheaded the launch of two B2B products, driving initial sales through targeted go-to-market strategies and robust client engagement initiatives.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Collaborated with cross-functional teams (Sales, Product Development, and Customer Success) to ensure alignment on product messaging and positioning.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Managed end-to-end marketing campaigns, from market research, market segmentation, competitive analysis, and content creation. Achieved a significant increase in MQLs (Marketing Qualified Leads).</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Marketing Lead at BCG -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Marketing Lead</h3>
+                                        <p class="text-lg opacity-80 mt-1">Boston Consulting Group (BCG)</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">May 2014 – Dec 2018</span>
+                                    </div>
+                                </div>
+                                <p class="opacity-70 mb-4 italic">4 years 8 months</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Led the development and execution of comprehensive communication and PR strategies to enhance BCG's brand reputation and visibility in the B2B sector.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Managed media relations, securing coverage in top-tier industry publications and achieving an increase in positive media mentions.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-400 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Developed crisis communication plans and managed PR crises, effectively mitigating negative publicity and maintaining brand integrity.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Page 2 Content -->
+            <div id="page2-content" class="page-content">
+                <!-- Earlier Experience section -->
+                <section class="py-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade-up">Earlier Experience</h2>
+                    
+                    <div class="timeline">
+                        <!-- Senior Analyst at McKinsey -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Senior Analyst</h3>
+                                        <p class="text-lg opacity-80 mt-1">McKinsey & Company</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Jul 2012 – Apr 2014</span>
+                                    </div>
+                                </div>
+                                <p class="opacity-70 mb-4 italic">1 year 10 months</p>
+                                <p>I worked on Product Marketing and management for the Digital Benchmarking Solution (McKBench). Executed a comprehensive marketing and sales strategy to effectively communicate the platform's value to stakeholders. Managed the brand for the benchmarking platform, ensuring a consistent and compelling image across all channels and touchpoints.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Analyst at McKinsey -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Analyst</h3>
+                                        <p class="text-lg opacity-80 mt-1">McKinsey & Company</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">Jul 2009 – Jun 2012</span>
+                                    </div>
+                                </div>
+                                <p class="opacity-70 mb-4 italic">3 years</p>
+                                <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams, using Excel, Macros, PowerPoint, SQL, and other technologies.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Earlier roles in collapsed view -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Earlier Roles</h3>
+                                        <p class="text-lg opacity-80 mt-1">Various Companies</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <span class="skill-bubble">2003 – 2009</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-4 mt-4">
+                                    <div class="p-4 rounded-lg subtle-border">
+                                        <div class="flex justify-between mb-2">
+                                            <h4 class="font-semibold">Junior Analyst, McKinsey & Company</h4>
+                                            <span class="text-sm opacity-80">Oct 2008 – Jun 2009</span>
+                                        </div>
+                                        <p>Part of the Data Analytics team, working on creating analytical models for McKinsey's case teams.</p>
+                                    </div>
+                                    
+                                    <div class="p-4 rounded-lg subtle-border">
+                                        <div class="flex justify-between mb-2">
+                                            <h4 class="font-semibold">MIS Executive, HCLTech</h4>
+                                            <span class="text-sm opacity-80">Jan 2007 – Sep 2008</span>
+                                        </div>
+                                        <p>Responsible for client reporting on call data originating from agents who answered technical queries over the phone.</p>
+                                    </div>
+                                    
+                                    <div class="p-4 rounded-lg subtle-border">
+                                        <div class="flex justify-between mb-2">
+                                            <h4 class="font-semibold">Marketing Executive, SBI MUTUAL FUND</h4>
+                                            <span class="text-sm opacity-80">Apr 2003 – Mar 2005</span>
+                                        </div>
+                                        <p>Reinvigorated the agent sales network and directly sold Mutual Funds. Set up the office of SBI Mutual Funds in Shimla from the ground up.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Skills and Education in two-column layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 py-12">
+                    <!-- Skills Section -->
+                    <section id="skills" class="fade-up">
+                        <h2 class="text-3xl font-bold mb-8">Skills & Expertise</h2>
+                        
+                        <div class="experience-card space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4">Marketing Strategy</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Brand Strategy</span>
+                                    <span class="skill-bubble">Market Research</span>
+                                    <span class="skill-bubble">Go-to-Market</span>
+                                    <span class="skill-bubble">Product Marketing</span>
+                                    <span class="skill-bubble">Employer Branding</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4">Digital Marketing</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Social Media</span>
+                                    <span class="skill-bubble">Content Strategy</span>
+                                    <span class="skill-bubble">SEO/SEM</span>
+                                    <span class="skill-bubble">Email Marketing</span>
+                                    <span class="skill-bubble">Analytics</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4">Business & Leadership</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Team Management</span>
+                                    <span class="skill-bubble">Stakeholder Management</span>
+                                    <span class="skill-bubble">Strategic Planning</span>
+                                    <span class="skill-bubble">Business Development</span>
+                                    <span class="skill-bubble">DEI Initiatives</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Technical skills with progress bars -->
+                        <div class="experience-card mt-8">
+                            <h3 class="text-xl font-semibold mb-6">Technical Skills</h3>
+                            
+                            <div class="space-y-5">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Photoshop & Design Tools</span>
+                                        <span class="text-sm opacity-80">Expert</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="95"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Digital Marketing Platforms</span>
+                                        <span class="text-sm opacity-80">Expert</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="90"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Data Analysis & Reporting</span>
+                                        <span class="text-sm opacity-80">Advanced</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="85"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Web Development</span>
+                                        <span class="text-sm opacity-80">Intermediate</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="70"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Python & Programming</span>
+                                        <span class="text-sm opacity-80">Intermediate</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="65"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Education and Certifications -->
+                    <section class="fade-up">
+                        <h2 class="text-3xl font-bold mb-8">Education & Certifications</h2>
+                        
+                        <!-- Education -->
+                        <div class="experience-card mb-8">
+                            <h3 class="text-xl font-semibold mb-6">Education</h3>
+                            
+                            <div class="space-y-8">
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
+                                    <h4 class="text-lg font-semibold">MBA, Marketing & Finance</h4>
+                                    <p class="opacity-80 mt-1">I.K. Gujral Punjab Technical University</p>
+                                    <p class="text-sm mt-1">2005 – 2007</p>
+                                </div>
+                                
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
+                                    <h4 class="text-lg font-semibold">BBA</h4>
+                                    <p class="opacity-80 mt-1">Punjab University (Chandigarh)</p>
+                                    <p class="text-sm mt-1">2003 – 2005</p>
+                                </div>
+                                
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-2 w-3 h-3 rounded-full bg-teal-400"></div>
+                                    <h4 class="text-lg font-semibold">International Certificate Program in Product Management & Marketing</h4>
+                                    <p class="opacity-80 mt-1">Institute of Product Leadership</p>
+                                    <p class="text-sm mt-1">2018 – 2019</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certifications -->
+                        <div class="experience-card">
+                            <h3 class="text-xl font-semibold mb-6">Certifications</h3>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fas fa-certificate text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">Google Analytics</h4>
+                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                </div>
+                                
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fab fa-linkedin text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">LinkedIn Ads</h4>
+                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                </div>
+                                
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fab fa-facebook text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">Meta Ads</h4>
+                                    <p class="text-sm opacity-80">Mar 2023</p>
+                                </div>
+                                
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fab fa-python text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">Python Django</h4>
+                                    <p class="text-sm opacity-80">Aug 2021</p>
+                                </div>
+                                
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fab fa-python text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">PCEP Python</h4>
+                                    <p class="text-sm opacity-80">Jul 2021</p>
+                                </div>
+                                
+                                <div class="p-4 rounded-lg subtle-border">
+                                    <i class="fab fa-google text-teal-400 mb-2"></i>
+                                    <h4 class="font-medium">Google Ads Display</h4>
+                                    <p class="text-sm opacity-80">Jun 2021</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <!-- Marketing Tools section -->
+                <section class="py-12 fade-up">
+                    <h2 class="text-3xl font-bold mb-8">Marketing Tools</h2>
+                    
+                    <div class="experience-card">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6">Expert Level</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Photoshop (Image design and manipulation)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Canva (Building social media assets)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Salesforce Cloud (Email marketing)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Phenom (Careers website)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>WordPress (Web development)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>HTML/JavaScript (Web development)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6">Intermediate Level</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Illustrator (Manipulating vector images)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Adobe XD (Design)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Dreamweaver (Web design)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-teal-400 mr-3"></i>
+                                        <span>Python/Django (Web development)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer area -->
+    <footer class="py-8 px-6 md:px-20 opacity-60 text-center border-t subtle-border">
+        <p>&copy; 2025 Amit Bhalla. All rights reserved.</p>
     </footer>
     
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
+        // ====== Theme toggle functionality =======
         const htmlElement = document.documentElement;
-        
-        themeToggle.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                htmlElement.classList.add('light');
-                localStorage.setItem('theme', 'light');
-            } else {
-                htmlElement.classList.remove('light');
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-        
-        // Tab switching functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tabName = button.getAttribute('data-tab');
-                
-                // Remove active class from all buttons and hide all contents
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.add('hidden'));
-                
-                // Add active class to clicked button and show corresponding content
-                button.classList.add('active');
-                document.getElementById(tabName).classList.remove('hidden');
-                
-                // Add fade-in animation
-                document.getElementById(tabName).classList.add('fade-in');
-                
-                // Remove fade-in class after animation completes
-                setTimeout(() => {
-                    document.getElementById(tabName).classList.remove('fade-in');
-                }, 600);
-            });
-        });
-        
-        // Initialize progress bars with animation
-        window.addEventListener('DOMContentLoaded', () => {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            
-            setTimeout(() => {
-                progressBars.forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0';
-                    
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
-                });
-            }, 500);
-        });
+        const themeToggles = document.querySelectorAll('.theme-toggle');
         
         // Apply saved theme preference or use default (dark)
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -811,18 +1342,296 @@
             htmlElement.classList.add('light');
         }
         
-        // Add hover effect for cards on mobile (touch)
-        const resumeCards = document.querySelectorAll('.resume-card');
-        resumeCards.forEach(card => {
-            card.addEventListener('touchstart', () => {
-                card.classList.add('hover');
-            }, { passive: true });
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+        
+        // ====== Mobile menu toggle =======
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuToggle?.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMenu?.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // ====== Tab switching functionality =======
+        const desktopTabBtns = document.querySelectorAll('.desktop-tab-btn');
+        const mobileTabBtns = document.querySelectorAll('.mobile-tab-btn');
+        const pageContents = document.querySelectorAll('.page-content');
+        
+        function switchTab(tabName) {
+            // Update tab button states
+            desktopTabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
             
-            card.addEventListener('touchend', () => {
-                setTimeout(() => {
-                    card.classList.remove('hover');
-                }, 300);
-            }, { passive: true });
+            mobileTabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Move tab indicators
+            const desktopActiveBtn = document.querySelector('.desktop-tab-btn.active');
+            const mobileActiveBtn = document.querySelector('.mobile-tab-btn.active');
+            
+            if (desktopActiveBtn) {
+                const desktopIndicator = desktopActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (desktopIndicator) {
+                    desktopIndicator.style.width = `${desktopActiveBtn.offsetWidth}px`;
+                    desktopIndicator.style.transform = `translateX(${desktopActiveBtn.offsetLeft - desktopActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            if (mobileActiveBtn) {
+                const mobileIndicator = mobileActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (mobileIndicator) {
+                    mobileIndicator.style.width = `${mobileActiveBtn.offsetWidth}px`;
+                    mobileIndicator.style.transform = `translateX(${mobileActiveBtn.offsetLeft - mobileActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            // Show correct content
+            pageContents.forEach(content => {
+                if (content.id === `${tabName}-content`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Update navigation items visibility based on active page
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const itemPage = item.getAttribute('data-page');
+                if (itemPage === 'all' || itemPage === tabName) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        desktopTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.getAttribute('data-tab'));
+            });
+        });
+        
+        mobileTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.getAttribute('data-tab'));
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Initialize tab indicators
+        window.addEventListener('DOMContentLoaded', () => {
+            const desktopActiveBtn = document.querySelector('.desktop-tab-btn.active');
+            const mobileActiveBtn = document.querySelector('.mobile-tab-btn.active');
+            
+            if (desktopActiveBtn) {
+                const desktopIndicator = desktopActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (desktopIndicator) {
+                    desktopIndicator.style.width = `${desktopActiveBtn.offsetWidth}px`;
+                    desktopIndicator.style.transform = `translateX(${desktopActiveBtn.offsetLeft - desktopActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            if (mobileActiveBtn) {
+                const mobileIndicator = mobileActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (mobileIndicator) {
+                    mobileIndicator.style.width = `${mobileActiveBtn.offsetWidth}px`;
+                    mobileIndicator.style.transform = `translateX(${mobileActiveBtn.offsetLeft - mobileActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+        });
+        
+        // ====== Scroll animations with Intersection Observer =======
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Initialize skill level bars
+            const skillLevels = document.querySelectorAll('.skill-level');
+            
+            setTimeout(() => {
+                skillLevels.forEach(skill => {
+                    const level = skill.getAttribute('data-level') + '%';
+                    skill.style.width = level;
+                });
+            }, 500);
+        });
+        
+        // ====== Custom cursor =======
+        const cursor = document.querySelector('.custom-cursor');
+        const trailContainer = document.getElementById('trail-container');
+        const trailElements = [];
+        const trailCount = 10;
+        
+        // Only enable custom cursor on non-touch devices
+        if (!('ontouchstart' in window) && window.innerWidth > 1024) {
+            cursor.style.display = 'block';
+            
+            // Create trail elements
+            for (let i = 0; i < trailCount; i++) {
+                const trail = document.createElement('div');
+                trail.classList.add('trail');
+                trailContainer.appendChild(trail);
+                trailElements.push(trail);
+            }
+            
+            document.addEventListener('mousemove', (e) => {
+                // Move custom cursor
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Update first trail position immediately
+                if (trailElements.length > 0) {
+                    trailElements[0].style.left = e.clientX + 'px';
+                    trailElements[0].style.top = e.clientY + 'px';
+                    trailElements[0].style.opacity = '0.8';
+                }
+            });
+            
+            // Animate trail with delay for each element
+            setInterval(() => {
+                for (let i = trailElements.length - 1; i > 0; i--) {
+                    if (trailElements[i-1].style.opacity !== '') {
+                        trailElements[i].style.left = trailElements[i-1].style.left;
+                        trailElements[i].style.top = trailElements[i-1].style.top;
+                        trailElements[i].style.opacity = (parseFloat(trailElements[i-1].style.opacity) * 0.8).toString();
+                    }
+                }
+            }, 30);
+            
+            // Add active state on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .skill-bubble, .nav-item, .experience-card');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.classList.add('active');
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('active');
+                });
+            });
+        }
+        
+        // ====== Scroll progress indicator =======
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+            
+            // Update active nav item
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollTop >= sectionTop - 200 && scrollTop < sectionTop + sectionHeight - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // ====== Initialize GSAP animations =======
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+            gsap.from(item, {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                delay: i * 0.1
+            });
+        });
+        
+        // Handle smooth scrolling for navigation links
+        const navLinks = document.querySelectorAll('.nav-item');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to the target element
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Make sure the correct tab is active on load
+        window.addEventListener('load', () => {
+            switchTab('page1');
+            
+            // Initialize navigation visibility
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const itemPage = item.getAttribute('data-page');
+                if (itemPage === 'all' || itemPage === 'page1') {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
