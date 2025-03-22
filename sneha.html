@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneha Bhandari - HR & People Analytics Professional</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        /* Core variables */
+        :root {
+            /* Dark mode */
+            --dark-bg: #1a2742; /* Darker shade of the navy */
+            --dark-bg-secondary: #18000c; /* Navy blue from user's input */
+            --dark-bg-secondary-rgb: 37, 60, 116; /* RGB values for gradients */
+            --dark-card: #121419; /* Slightly lighter than background */
+            --dark-surface: #2a3356; /* For cards and interactive elements */
+            --dark-text: #f1f5f9; /* Light text color for dark mode */
+            --dark-accent: #ff6b9d; /* Softer pink accent for Sneha */
+            --dark-accent-rgb: 255, 107, 157; /* RGB values for gradients */
+            --dark-accent-hover: #ff4b88; /* Lighter pink for hover */
+            --dark-secondary: #9a6bff; /* Purple secondary color for gradients */
+            --dark-muted: #6b7280; /* Muted text color */
+            --dark-border: rgba(255, 107, 157, 0.25); /* Semi-transparent accent for borders */
+            
+            /* Light mode */
+            --light-bg: #f8fafc; /* Light background */
+            --light-bg-secondary: #f5eef7; /* Slight purplish tint */
+            --light-bg-secondary-rgb: 245, 238, 247; /* RGB values for gradients */
+            --light-card: #ffffff; /* White for cards */
+            --light-surface: #f1f5f9; /* For interactive elements */
+            --light-text: #2d1a3e; /* Deep purple for text */
+            --light-accent: #b36fdb; /* Purple accent */
+            --light-accent-rgb: 179, 111, 219; /* RGB values for gradients */
+            --light-accent-hover: #a55cd0; /* Darker purple for hover */
+            --light-secondary: #65b8d7; /* Blue from user's input */
+            --light-secondary-rgb: 101, 184, 215; /* RGB values for gradients */
+            --light-muted: #64748b; /* Muted text color */
+            --light-border: rgba(179, 111, 219, 0.25); /* Semi-transparent accent for borders */
+            
+            /* Common */
+            --transition-speed: 0.4s;
+            --border-radius-sm: 8px;
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Smooth scrolling for the entire page */
+            scroll-behavior: smooth;
+        }
+        
+        /* Base Theme Setup */
+        .dark {
+            --bg-color: var(--dark-bg);
+            --bg-secondary: var(--dark-bg-secondary);
+            --bg-secondary-rgb: var(--dark-bg-secondary-rgb);
+            --card-bg: var(--dark-card);
+            --surface: var(--dark-surface);
+            --text-color: var(--dark-text);
+            --text-muted: var(--dark-muted);
+            --accent-color: var(--dark-accent);
+            --accent-rgb: var(--dark-accent-rgb);
+            --accent-hover: var(--dark-accent-hover);
+            --secondary-color: var(--dark-secondary);
+            --border-color: var(--dark-border);
+            --scroll-thumb: var(--dark-accent);
+            --glass-bg: rgba(32, 43, 79, 0.8);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .light {
+            --bg-color: var(--light-bg);
+            --bg-secondary: var(--light-bg-secondary);
+            --bg-secondary-rgb: var(--light-bg-secondary-rgb);
+            --card-bg: var(--light-card);
+            --surface: var(--light-surface);
+            --text-color: var(--light-text);
+            --text-muted: var(--light-muted);
+            --accent-color: var(--light-accent);
+            --accent-rgb: var(--light-accent-rgb);
+            --accent-hover: var(--light-accent-hover);
+            --secondary-color: var(--light-secondary);
+            --secondary-rgb: var(--light-secondary-rgb);
+            --border-color: var(--light-border);
+            --scroll-thumb: var(--light-accent);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(45, 26, 62, 0.1);
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Background patterns for depth */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--accent-color) 0%, transparent 12%),
+                radial-gradient(circle at 80% 70%, var(--accent-color) 0%, transparent 12%);
+            background-size: 60vw 60vw;
+            background-position: 0 0, 30vw 30vw;
+            opacity: 0.05;
+        }
+        
+        /* Main background gradient overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, 
+                        var(--bg-color) 0%, 
+                        var(--bg-secondary) 50%, 
+                        var(--bg-color) 100%);
+            opacity: 0.8;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--scroll-thumb);
+            border-radius: 50px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Glassmorphism Elements */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+        }
+        
+        /* Layout Components */
+        .navigation-rail {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            transition: all var(--transition-speed);
+            z-index: 100;
+            box-shadow: 2px 0 10px var(--shadow-color);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-color);
+            z-index: 1000;
+            clip-path: circle(0px at 92% 8%);
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .mobile-menu.active {
+            clip-path: circle(150% at 92% 8%);
+        }
+
+        /* Modern card design */
+        .card {
+            background: linear-gradient(145deg, 
+                        var(--card-bg) 0%, 
+                        rgba(var(--bg-secondary-rgb), 0.2) 100%);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, 
+                        rgba(var(--accent-rgb), 0.1) 0%, 
+                        transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Experience Card Components */
+        .experience-card {
+            background: linear-gradient(145deg, 
+                        var(--card-bg) 0%, 
+                        rgba(var(--bg-secondary-rgb), 0.2) 100%);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                        var(--accent-color), 
+                        var(--accent-hover));
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+        }
+        
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, 
+                        rgba(var(--accent-rgb), 0.05) 0%, 
+                        transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .experience-card:hover::after {
+            opacity: 1;
+        }
+        
+        /* Interactive Elements */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            opacity: 0.6;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: var(--accent-color);
+            opacity: 1;
+            background-color: var(--surface);
+        }
+        
+        .nav-item:hover:not(.active) {
+            opacity: 0.8;
+            background-color: var(--surface);
+        }
+        
+        .skill-bubble {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: var(--surface);
+            color: var(--text-color);
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .skill-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            z-index: -1;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .skill-bubble:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-color: transparent;
+        }
+        
+        .skill-bubble:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(to right, var(--dark-bg), var(--dark-accent), var(--dark-secondary));
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            box-sizing: border-box;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .light .theme-toggle {
+            background: linear-gradient(to right, var(--light-bg), var(--light-accent), var(--light-secondary));
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle i {
+            font-size: 14px;
+            color: white;
+            z-index: 1;
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light .theme-toggle::after {
+            transform: translateX(30px);
+        }
+        
+        /* Progress indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        /* Special Elements */
+        .highlight-text {
+            position: relative;
+            display: inline;
+            color: var(--accent-color);
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .highlight-text::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 2px;
+            left: 0;
+            background: var(--accent-color);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .job-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.85rem;
+            box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.2);
+        }
+
+        .job-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
+        }
+
+        /* Timeline Component */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                        var(--accent-color) 0%, 
+                        var(--secondary-color) 100%);
+            opacity: 0.3;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -41px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            border: 3px solid var(--bg-color);
+            z-index: 1;
+            box-shadow: 0 0 0 4px var(--border-color);
+        }
+        
+        /* Animated sections */
+        .fade-up {
+            opacity: 1; /* Changed from 0 to ensure content is visible by default */
+            transform: translateY(0); /* Reset transform to ensure visibility */
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Skill chart */
+        .skill-chart {
+            width: 100%;
+            height: 8px;
+            background: var(--surface);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Tab System */
+        .tab-container {
+            background: var(--surface);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn {
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+            border-radius: 50px;
+        }
+        
+        .tab-btn.active {
+            color: var(--accent-color);
+        }
+        
+        .tab-indicator {
+            position: absolute;
+            height: calc(100% - 8px);
+            background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+            border-radius: 50px;
+            z-index: 0;
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            top: 4px;
+            box-shadow: 0 2px 10px rgba(var(--accent-rgb), 0.3);
+        }
+        
+        /* Page specific styles */
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+        }
+        
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        
+        /* Utility classes */
+        .text-gradient {
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px var(--shadow-color);
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, var(--accent-color), var(--accent-hover)) 1;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            z-index: -1;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px var(--shadow-color);
+        }
+        
+        .btn-outline:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .subtle-border {
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Badge component */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: linear-gradient(to right, 
+                      rgba(var(--accent-rgb), 0.1),
+                      rgba(var(--accent-rgb), 0.05));
+            color: var(--accent-color);
+            border: 1px solid rgba(var(--accent-rgb), 0.2);
+        }
+        
+        /* Initials avatar */
+        .initials-avatar {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .initials-avatar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navigation-rail {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 0 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .experience-card {
+                padding: 1.5rem;
+            }
+            
+            .timeline {
+                padding-left: 25px;
+            }
+            
+            .timeline-dot {
+                left: -34px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background pattern -->
+    <div class="bg-pattern"></div>
+    
+    <!-- Progress indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="scrollProgress"></div>
+    </div>
+    
+    <!-- Mobile navigation header -->
+    <div class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 glass md:hidden">
+        <div class="flex items-center space-x-3">
+            <div class="initials-avatar w-10 h-10 text-lg">
+                SB
+            </div>
+            <span class="font-semibold text-lg">Sneha Bhandari</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+            <button id="mobileMenuToggle" class="p-2 rounded-full hover:bg-surface">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu py-20 px-8">
+        <div class="flex justify-end mb-8">
+            <button id="closeMenu" class="p-2 rounded-full hover:bg-surface">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <div class="initials-avatar w-24 h-24 text-3xl">
+                SB
+            </div>
+            <h2 class="text-2xl font-bold">Sneha Bhandari</h2>
+            <p class="text-center text-text-muted">HR & People Analytics Professional</p>
+            
+            <div class="w-full mt-8">
+                <div class="flex justify-center mb-8">
+                    <div class="tab-container inline-flex">
+                        <div class="tab-indicator"></div>
+                        <button data-tab="page1" class="mobile-tab-btn tab-btn active">Experience</button>
+                        <button data-tab="page2" class="mobile-tab-btn tab-btn">Skills & Education</button>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 mt-8">
+                    <a href="mailto:reachsnehabhandari@gmail.com" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
+                        <i class="fas fa-envelope"></i>
+                        <span>reachsnehabhandari@gmail.com</span>
+                    </a>
+                    <a href="tel:+919310438834" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 9310438834</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/snehabhandari/" target="_blank" class="flex items-center justify-center space-x-3 p-3 rounded-lg subtle-border bg-surface">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="Sneha_Bhandari.pdf" class="btn-primary" target="_blank">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Desktop navigation rail -->
+    <div class="navigation-rail fixed top-0 left-0 h-screen w-20 flex flex-col items-center py-8 hidden md:flex">
+        <div class="initials-avatar w-12 h-12 text-lg mb-8">
+            SB
+        </div>
+        
+        <div class="flex flex-col items-center space-y-5 mt-10">
+            <a href="#summary" class="nav-item active" data-page="all">
+                <i class="fas fa-user text-lg"></i>
+            </a>
+            <a href="#experience" class="nav-item" data-page="page1">
+                <i class="fas fa-briefcase text-lg"></i>
+            </a>
+            <a href="#skills" class="nav-item" data-page="page2">
+                <i class="fas fa-chart-pie text-lg"></i>
+            </a>
+            <a href="#education" class="nav-item" data-page="page2">
+                <i class="fas fa-graduation-cap text-lg"></i>
+            </a>
+        </div>
+        
+        <div class="mt-auto">
+            <div class="theme-toggle" id="desktopThemeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="main-content ml-0 md:ml-20 pt-20 md:pt-0">
+        <!-- Header area -->
+        <header class="pt-12 md:pt-16 px-6 md:px-20 pb-8 md:pb-16">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-12">
+                <div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient">Sneha Bhandari</h1>
+                    <p class="text-xl md:text-2xl text-text-muted">HR & People Analytics Professional</p>
+                </div>
+                
+                <div class="mt-8 md:mt-0">
+                    <div class="hidden md:flex tab-container">
+                        <div class="tab-indicator"></div>
+                        <button data-tab="page1" class="desktop-tab-btn tab-btn active">Experience</button>
+                        <button data-tab="page2" class="desktop-tab-btn tab-btn">Skills & Education</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between md:items-center mt-8 pb-8 border-b border-border-color">
+                <div class="flex flex-wrap gap-3">
+                    <a href="mailto:reachsnehabhandari@gmail.com" class="skill-bubble">
+                        <i class="fas fa-envelope mr-2"></i>
+                        reachsnehabhandari@gmail.com
+                    </a>
+                    <a href="tel:+919310438834" class="skill-bubble">
+                        <i class="fas fa-phone mr-2"></i>
+                        +91 9310438834
+                    </a>
+                    <a href="https://www.linkedin.com/in/snehabhandari/" target="_blank" class="skill-bubble">
+                        <i class="fab fa-linkedin mr-2"></i>
+                        LinkedIn
+                    </a>
+                </div>
+                
+                <div class="mt-6 md:mt-0">
+                    <a href="Sneha_Bhandari.pdf" class="btn-primary" target="_blank">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Summary section -->
+        <section id="summary" class="px-6 md:px-20 py-12">
+            <div class="experience-card mb-12 fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6">Professional Summary</h2>
+                <p class="text-lg leading-relaxed">
+                    I'm a dynamic HR and People Analytics professional with expertise in employee listening, 
+                    people analytics, and strategic HR interventions. My track record includes leading 
+                    data-driven HR initiatives across <span class="highlight-text">13 countries</span> for over 
+                    <span class="highlight-text">158,000 employees</span>, implementing global frameworks, and 
+                    driving measurable impact in employee experience and organizational development. With a passion 
+                    for DEI initiatives, I've also established impactful programs supporting the LGBTQ+ community 
+                    through leadership and mentorship.
+                </p>
+            </div>
+            
+            <!-- Metrics showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">37%</div>
+                    <p class="text-lg text-text-muted">Reduced New-Hire Failure</p>
+                </div>
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">98%</div>
+                    <p class="text-lg text-text-muted">Global Participation Rate</p>
+                </div>
+                <div class="card text-center p-8">
+                    <div class="text-4xl md:text-5xl font-bold text-gradient mb-3">100%</div>
+                    <p class="text-lg text-text-muted">Historic Placement Rate</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tabbed content wrapper -->
+        <div class="px-6 md:px-20 pb-20">
+            <!-- Page 1 Content -->
+            <div id="page1-content" class="page-content active">
+                <!-- Experience section -->
+                <section id="experience" class="py-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade-up">Work Experience</h2>
+                    
+                    <div class="timeline">
+                        <!-- Analyst at Nestlé -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Analyst, Employee Listening – Global People Analytics</h3>
+                                        <p class="text-lg text-text-muted mt-1">Nestlé Business Services, Gurugram, India</p>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Aug 2024 – Present</span>
+                                    </div>
+                                </div>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Leading the employee listening portfolio for Zone Asia, Oceania, and Africa, covering 13 countries and 158,000 employees, advancing a data-driven listening strategy with bespoke surveys, focus groups, and interviews.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Revived and launched a Global Market Maturity Assessment across 42 countries, securing 98% participation from HR Leadership Teams, strengthening employee listening effectiveness, and closing critical developmental gaps.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Designed and implemented a Global People Analytics Onboarding framework, reducing new-hire failure by 37% and accelerating time-to-productivity.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Developed a post-survey Global Action Planning toolkit, standardizing data analysis and execution governance to drive measurable impact.</span>
+                                    </li>
+                                </ul>
+                                <div class="job-tags">
+                                    <span class="job-tag">Employee Listening</span>
+                                    <span class="job-tag">People Analytics</span>
+                                    <span class="job-tag">Action Planning</span>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="italic text-text-muted">Professional Recognition: Managing Director's Special Recognition for Exemplary Contributions at Nestlé Annual Awards '24</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HR Business Partnering Trainee at Nestlé -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">HR Business Partnering Trainee</h3>
+                                        <p class="text-lg text-text-muted mt-1">Nestlé Business Services, Gurugram, India</p>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Aug 2023 – Jul 2024</span>
+                                    </div>
+                                </div>
+                                <p class="mb-5 italic">Managed 300+ employees</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Led NBS' first-ever Persons with Disability recruitment, hiring 11 candidates & championed workplace inclusion.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Launched an Assessment Development Centre, accelerating leadership growth with 57% of participants promoted to managerial roles within 6 months of developmental journey completion.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Designed and executed a Line Managers Capability Program, increasing leadership effectiveness from 67% to 82% through skills-gap analysis and persona-based learning frameworks.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Drove 40+ engagement initiatives, achieving an NPS of 94% and fostering a high-performance culture through strategic HR interventions.</span>
+                                    </li>
+                                </ul>
+                                <div class="job-tags">
+                                    <span class="job-tag">Inclusion & Diversity</span>
+                                    <span class="job-tag">Leadership Development</span>
+                                    <span class="job-tag">Employee Engagement</span>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="italic text-text-muted">Professional Recognition: Gen-Z Trailblazer Award for exceptional leadership and strategic HR contributions among 22 Graduate Trainees</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Leadership Experience section -->
+                <section id="leadership" class="py-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade-up">Leadership Experience</h2>
+                    
+                    <div class="timeline">
+                        <!-- Nestlé Beacon – LGBTQ+ ERG -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">Founding Lead – Outreach Pillar</h3>
+                                        <p class="text-lg text-text-muted mt-1">Nestlé Beacon – LGBTQ+ ERG, India</p>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jul 2024 – Present</span>
+                                    </div>
+                                </div>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Leading a team of 33+ allies to drive empowerment, enrichment, and employability for the LGBTQ+ community.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Project Kaabil: Designed and launched a Transgender Skill-Building Programme, training 50+ trans individuals in employability skills through 1:1 mentorship.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Project Sahyog: Facilitated the donation of 43+ refurbished Nestlé laptops to support the higher education of underprivileged transgender individuals.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Nesternship: Successfully placed 12 LGBTQ+ interns across functions, increasing DE&I representation by 40% across all organizational levels within two months.</span>
+                                    </li>
+                                </ul>
+                                <div class="job-tags">
+                                    <span class="job-tag">DEI Initiatives</span>
+                                    <span class="job-tag">Mentorship Programs</span>
+                                    <span class="job-tag">Community Outreach</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- The Placement Cell, Jesus & Mary College -->
+                        <div class="timeline-item fade-up">
+                            <div class="timeline-dot"></div>
+                            <div class="experience-card">
+                                <div class="flex flex-col md:flex-row justify-between md:items-start mb-6">
+                                    <div>
+                                        <h3 class="text-xl md:text-2xl font-bold">President</h3>
+                                        <p class="text-lg text-text-muted mt-1">The Placement Cell, Jesus & Mary College, India</p>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="badge bg-surface">Jul 2022 – May 2023</span>
+                                    </div>
+                                </div>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Managed strategic relationships with faculty across 13 departments & 35 courses, 450+ employers, and a diverse student body of 3,670+ undergraduates.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Led a team of 55 members across Training & Development, Finance, Corporate Relations, & Outreach divisions.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent-color mt-1 mr-3 flex-shrink-0"></i>
+                                        <span>Achieved a historic 100% placement rate, securing 456+ full-time offers and generating $2.85M in gross salary packages.</span>
+                                    </li>
+                                </ul>
+                                <div class="job-tags">
+                                    <span class="job-tag">Stakeholder Management</span>
+                                    <span class="job-tag">Team Leadership</span>
+                                    <span class="job-tag">Career Development</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Page 2 Content -->
+            <div id="page2-content" class="page-content">
+                <!-- Skills and Education in two-column layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 py-12">
+                    <!-- Skills Section -->
+                    <section id="skills" class="fade-up">
+                        <h2 class="text-3xl font-bold mb-8">Skills & Expertise</h2>
+                        
+                        <div class="experience-card space-y-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-5">HR Analytics & Strategy</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Employee Listening</span>
+                                    <span class="skill-bubble">People Analytics</span>
+                                    <span class="skill-bubble">Survey Design</span>
+                                    <span class="skill-bubble">Data-Driven HR</span>
+                                    <span class="skill-bubble">Action Planning</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-5">HR Operations</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Talent Acquisition</span>
+                                    <span class="skill-bubble">Leadership Development</span>
+                                    <span class="skill-bubble">DEI Initiatives</span>
+                                    <span class="skill-bubble">Employee Engagement</span>
+                                    <span class="skill-bubble">HR Business Partnering</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-5">Leadership & Communication</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-bubble">Team Management</span>
+                                    <span class="skill-bubble">Stakeholder Relations</span>
+                                    <span class="skill-bubble">Strategic Planning</span>
+                                    <span class="skill-bubble">Project Management</span>
+                                    <span class="skill-bubble">Content Creation</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Technical skills with progress bars -->
+                        <div class="experience-card mt-8">
+                            <h3 class="text-xl font-semibold mb-6">Technical Skills</h3>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">MS Office Suite</span>
+                                        <span class="text-sm text-accent-color font-medium">Expert</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="95"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Qualtrics</span>
+                                        <span class="text-sm text-accent-color font-medium">Expert</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="90"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Power BI</span>
+                                        <span class="text-sm text-accent-color font-medium">Advanced</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="85"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">R & Python</span>
+                                        <span class="text-sm text-accent-color font-medium">Intermediate</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="75"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-medium">Azure Cloud & Snowflake</span>
+                                        <span class="text-sm text-accent-color font-medium">Intermediate</span>
+                                    </div>
+                                    <div class="skill-chart">
+                                        <div class="skill-level" data-level="70"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Education and Interests -->
+                    <section id="education" class="fade-up">
+                        <h2 class="text-3xl font-bold mb-8">Education & Interests</h2>
+                        
+                        <!-- Education -->
+                        <div class="experience-card mb-8">
+                            <h3 class="text-xl font-semibold mb-6">Education</h3>
+                            
+                            <div class="space-y-8">
+                                <div class="card p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-graduation-cap text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">Bachelor of Commerce</h4>
+                                            <p class="text-text-muted">Jesus & Mary College, University of Delhi, India</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-text-muted ml-14">Nov 2020 – May 2023</p>
+                                    <p class="text-sm ml-14 mt-2">CGPA: 3.49/4.00, among the top 1%</p>
+                                    <p class="text-sm ml-14 mt-1">Awarded Star Student of the Year by Department of Commerce</p>
+                                </div>
+                                
+                                <div class="card p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-school text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">Senior Secondary School</h4>
+                                            <p class="text-text-muted">Amity International School, India</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-text-muted ml-14">Apr 2008 – Mar 2020</p>
+                                    <p class="text-sm ml-14 mt-2">CGPA: 3.90/4.00</p>
+                                    <p class="text-sm ml-14 mt-1">Recipient of Chairperson's Gold Medal for Academic Excellence</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interests -->
+                        <div class="experience-card">
+                            <h3 class="text-xl font-semibold mb-6">Interests & Content Creation</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="p-5 rounded-lg card">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fab fa-linkedin text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">LinkedIn Content Creator</h4>
+                                        </div>
+                                    </div>
+                                    <p class="ml-14 mb-2">Growing audience of 13,100+ followers</p>
+                                    <p class="ml-14">Creating content on HR trends, people analytics, and professional development</p>
+                                </div>
+                                
+                                <div class="p-5 rounded-lg card">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-accent-color bg-opacity-20 flex items-center justify-center mr-4">
+                                            <i class="fas fa-newspaper text-accent-color"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">The Behavioural Affair Newsletter</h4>
+                                        </div>
+                                    </div>
+                                    <p class="ml-14 mb-2">3,100+ subscribers with 17,350+ average monthly impressions</p>
+                                    <p class="ml-14">Sharing insights on behavioral science in the workplace</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <!-- HR Tools & Technologies section -->
+                <section class="py-12 fade-up">
+                    <h2 class="text-3xl font-bold mb-8">HR Tools & Technologies</h2>
+                    
+                    <div class="experience-card">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6">Analytics & Data Tools</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Qualtrics (Survey design and analytics)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Power BI (Dashboard creation and reporting)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>R (Statistical analysis and data visualization)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Python (Data processing and analysis)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Snowflake (Data warehousing)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold mb-6">HR Systems & Platforms</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>MS Office Suite (Excel, PowerPoint, Word)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Faethm (Workforce analytics)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Azure Cloud (Cloud computing solutions)</span>
+                                    </li>
+                                    <li class="flex items-center p-3 card">
+                                        <i class="fas fa-check-circle text-accent-color mr-3"></i>
+                                        <span>Canva (Design and visual communication)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer area -->
+    <footer class="py-8 px-6 md:px-20 text-text-muted text-center border-t subtle-border">
+        <p>&copy; 2025 Sneha Bhandari. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // ====== Theme toggle functionality =======
+        const htmlElement = document.documentElement;
+        const themeToggles = document.querySelectorAll('.theme-toggle');
+        
+        // Apply saved theme preference or use default (dark)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+        }
+        
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+        
+        // ====== Mobile menu toggle =======
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuToggle?.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMenu?.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // ====== Tab switching functionality =======
+        const desktopTabBtns = document.querySelectorAll('.desktop-tab-btn');
+        const mobileTabBtns = document.querySelectorAll('.mobile-tab-btn');
+        const pageContents = document.querySelectorAll('.page-content');
+        
+        function switchTab(tabName) {
+            // Update tab button states
+            desktopTabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            mobileTabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Move tab indicators
+            const desktopActiveBtn = document.querySelector('.desktop-tab-btn.active');
+            const mobileActiveBtn = document.querySelector('.mobile-tab-btn.active');
+            
+            if (desktopActiveBtn) {
+                const desktopIndicator = desktopActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (desktopIndicator) {
+                    desktopIndicator.style.width = `${desktopActiveBtn.offsetWidth}px`;
+                    desktopIndicator.style.transform = `translateX(${desktopActiveBtn.offsetLeft - desktopActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            if (mobileActiveBtn) {
+                const mobileIndicator = mobileActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (mobileIndicator) {
+                    mobileIndicator.style.width = `${mobileActiveBtn.offsetWidth}px`;
+                    mobileIndicator.style.transform = `translateX(${mobileActiveBtn.offsetLeft - mobileActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            // Show correct content
+            pageContents.forEach(content => {
+                if (content.id === `${tabName}-content`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Toggle visibility of summary section based on active tab
+            const summarySection = document.getElementById('summary');
+            if (summarySection) {
+                if (tabName === 'page1') {
+                    summarySection.style.display = 'block';
+                } else {
+                    summarySection.style.display = 'none';
+                }
+            }
+            
+            // Update navigation items visibility based on active page
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const itemPage = item.getAttribute('data-page');
+                if (itemPage === 'all' || itemPage === tabName) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        desktopTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.getAttribute('data-tab'));
+            });
+        });
+        
+        mobileTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.getAttribute('data-tab'));
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Initialize tab indicators
+        window.addEventListener('DOMContentLoaded', () => {
+            const desktopActiveBtn = document.querySelector('.desktop-tab-btn.active');
+            const mobileActiveBtn = document.querySelector('.mobile-tab-btn.active');
+            
+            if (desktopActiveBtn) {
+                const desktopIndicator = desktopActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (desktopIndicator) {
+                    desktopIndicator.style.width = `${desktopActiveBtn.offsetWidth}px`;
+                    desktopIndicator.style.transform = `translateX(${desktopActiveBtn.offsetLeft - desktopActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+            
+            if (mobileActiveBtn) {
+                const mobileIndicator = mobileActiveBtn.parentElement.querySelector('.tab-indicator');
+                if (mobileIndicator) {
+                    mobileIndicator.style.width = `${mobileActiveBtn.offsetWidth}px`;
+                    mobileIndicator.style.transform = `translateX(${mobileActiveBtn.offsetLeft - mobileActiveBtn.parentElement.offsetLeft}px)`;
+                }
+            }
+        });
+        
+        // ====== Scroll animations with Intersection Observer =======
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Initialize skill level bars
+            const skillLevels = document.querySelectorAll('.skill-level');
+            
+            setTimeout(() => {
+                skillLevels.forEach(skill => {
+                    const level = skill.getAttribute('data-level') + '%';
+                    skill.style.width = level;
+                });
+            }, 500);
+        });
+        
+        // ====== Scroll progress indicator =======
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+            
+            // Update active nav item
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollTop >= sectionTop - 200 && scrollTop < sectionTop + sectionHeight - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // ====== Initialize GSAP animations =======
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+            gsap.from(item, {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                delay: i * 0.1
+            });
+        });
+        
+        // Handle smooth scrolling for navigation links
+        const navLinks = document.querySelectorAll('.nav-item');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to the target element
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Make sure the correct tab is active on load
+        window.addEventListener('load', () => {
+            switchTab('page1');
+            
+            // Initialize navigation visibility
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const itemPage = item.getAttribute('data-page');
+                if (itemPage === 'all' || itemPage === 'page1') {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
