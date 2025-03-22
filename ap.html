@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYND AP Outsourcing ROI Calculator</title>
+    <style>
+        :root {
+            --primary: #253c74;
+            --primary-light: #3a5190;
+            --primary-dark: #1a2a56;
+            --accent: #ee3897;
+            --accent-light: #f25aaa;
+            --accent-dark: #d0237f;
+            --dark-bg: #121a2f;
+            --dark-surface: #1c273f;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8cc;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --card-gradient: linear-gradient(135deg, rgba(37,60,116,0.7), rgba(28,39,63,0.9));
+            --result-gradient: linear-gradient(135deg, rgba(37,60,116,0.95), rgba(26,42,86,0.98));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 10% 20%, rgba(37,60,116,0.3) 0%, rgba(18,26,47,0.5) 90%);
+            background-attachment: fixed;
+        }
+
+        /* Container and layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .calculator-wrapper {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Components */
+        .card {
+            background: var(--card-gradient);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title svg {
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Slider styling */
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--dark-surface);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--dark-surface);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-value {
+            min-width: 80px;
+            background: rgba(37, 60, 116, 0.5);
+            color: var(--text-primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid rgba(238, 56, 151, 0.3);
+        }
+
+        /* Results section */
+        .results-card {
+            background: var(--result-gradient);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            position: sticky;
+            top: 2rem;
+            border: 1px solid rgba(238, 56, 151, 0.2);
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            margin: 1.5rem 0;
+            text-shadow: 0 2px 10px rgba(238, 56, 151, 0.3);
+        }
+
+        .result-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-detail:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+        }
+
+        .result-number {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Header styling */
+        .header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(238, 56, 151, 0.3);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            transition: transform 0.7s;
+            opacity: 0;
+        }
+
+        .btn:hover::after {
+            transform: rotate(30deg) translate(100%, 100%);
+            opacity: 1;
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .w-100 {
+            width: 100%;
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 0.5rem;
+            cursor: help;
+        }
+
+        .tooltip .icon {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-surface);
+            color: var(--text-secondary);
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.75rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Footer styling */
+        .footer {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            background: linear-gradient(to top, rgba(26, 42, 86, 0.8), transparent);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Animated elements */
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Benefit list styling */
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefit-list li::before {
+            content: "✓";
+            display: inline-block;
+            margin-right: 0.75rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Additional utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mt-4 {
+            margin-top: 2rem;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .slider-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .slider-value {
+                align-self: flex-end;
+            }
+            
+            .results-card {
+                position: static; /* Remove sticky positioning on mobile */
+            }
+            
+            .result-value {
+                font-size: 2.5rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">MYND<span>.</span></div>
+            <a href="#" class="btn">Contact Us</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="text-center mb-3">Accounts Payable Outsourcing ROI Calculator</h1>
+        <p class="header-subtitle">Discover how much your organization could save by outsourcing your Accounts Payable process to MYND. Adjust the parameters below to see your potential ROI in real-time.</p>
+        
+        <div class="calculator-wrapper">
+            <!-- Input Section -->
+            <div class="inputs-column">
+                <!-- Current AP Process Section -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        Current AP Process
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Annual Invoice Volume
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Total number of invoices processed annually</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="1000" max="100000" step="1000" value="24000" id="annualInvoiceVolume" class="slider">
+                            <span class="slider-value" id="annualInvoiceVolumeValue">24,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Number of AP Staff
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Current number of staff dedicated to the AP process</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="100" step="1" value="5" id="apStaffCount" class="slider">
+                            <span class="slider-value" id="apStaffCountValue">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Average Annual Cost per Employee (fully loaded)
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Includes salary, benefits, workspace, etc.</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="100000" max="2000000" step="5000" value="400000" id="employeeCost" class="slider">
+                            <span class="slider-value" id="employeeCostValue">4,00,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Annual AP Technology Costs
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Software, maintenance, and other technology costs</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="100000" max="3000000" step="10000" value="1000000" id="techCosts" class="slider">
+                            <span class="slider-value" id="techCostsValue">₹10,00,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error and Efficiency Section -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        Errors & Efficiency
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Current Error Rate (%)
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Percentage of invoices requiring correction</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="30" step="0.5" value="8" id="errorRate" class="slider">
+                            <span class="slider-value" id="errorRateValue">8%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Cost to Correct Each Error
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Time and resources spent rectifying each error</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="10" max="200" step="5" value="50" id="errorCost" class="slider">
+                            <span class="slider-value" id="errorCostValue">$50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Late Payment Percentage
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Percentage of invoices paid after due date</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="50" step="1" value="12" id="latePaymentPercent" class="slider">
+                            <span class="slider-value" id="latePaymentPercentValue">12%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Average Late Fee
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Typical late payment penalty</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="5" max="100" step="5" value="35" id="lateFee" class="slider">
+                            <span class="slider-value" id="lateFeeValue">₹35</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Discounts & Compliance Section -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                        Discounts & Compliance
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Percentage of Invoices Eligible for Discounts
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Invoices with early payment discount terms</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" step="1" value="18" id="discountEligible" class="slider">
+                            <span class="slider-value" id="discountEligibleValue">18%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Average Discount Percentage
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Typical early payment discount (e.g., 2/10 net 30)</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="5" step="0.1" value="2" id="discountPercent" class="slider">
+                            <span class="slider-value" id="discountPercentValue">2%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Current Discount Capture Rate
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Percentage of available discounts currently captured</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" step="1" value="30" id="discountCaptureRate" class="slider">
+                            <span class="slider-value" id="discountCaptureRateValue">30%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Annual Storage & Compliance Costs
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Document storage, audit, and compliance costs</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="50000" step="1000" value="15000" id="complianceCosts" class="slider">
+                            <span class="slider-value" id="complianceCostsValue">$15,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Outsourcing Assumptions Section -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                        Outsourcing Assumptions
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            MYND Cost per Invoice
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Service fee per invoice processed</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="10" step="0.1" value="3.5" id="outsourcedCostPerInvoice" class="slider">
+                            <span class="slider-value" id="outsourcedCostPerInvoiceValue">$3.50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Number of Retained AP Staff
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Staff necessary for oversight and exceptions</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="10" step="1" value="1" id="retainedStaff" class="slider">
+                            <span class="slider-value" id="retainedStaffValue">1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Implementation Cost
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">One-time setup and implementation costs</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="5000" max="100000" step="5000" value="35000" id="implementationCost" class="slider">
+                            <span class="slider-value" id="implementationCostValue">$35,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Contract Years
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Duration of the outsourcing contract</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="5" step="1" value="3" id="contractYears" class="slider">
+                            <span class="slider-value" id="contractYearsValue">3 years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Outsourcing Benefits Section -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 11 12 14 22 4"></polyline>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                        Outsourcing Benefits
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Expected Error Rate with MYND
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Projected error rate after outsourcing</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="5" step="0.1" value="1.5" id="newErrorRate" class="slider">
+                            <span class="slider-value" id="newErrorRateValue">1.5%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Expected Late Payment % with MYND
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Projected late payment percentage after outsourcing</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="10" step="0.5" value="3" id="newLatePayment" class="slider">
+                            <span class="slider-value" id="newLatePaymentValue">3%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Expected Discount Capture Rate with MYND
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Percentage of available discounts captured after outsourcing</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" step="1" value="85" id="newDiscountCapture" class="slider">
+                            <span class="slider-value" id="newDiscountCaptureValue">85%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Reduced Storage & Compliance Costs
+                            <div class="tooltip">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="tooltip-text">Reduced document storage and compliance costs after outsourcing</span>
+                            </div>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="20000" step="1000" value="5000" id="newComplianceCosts" class="slider">
+                            <span class="slider-value" id="newComplianceCostsValue">$5,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calculate Button -->
+                <div class="card" style="display: none;">
+                    <button id="calculateButton" class="btn btn-lg btn-accent w-100">Calculate ROI</button>
+                </div>
+            </div>
+            
+            <!-- Results Column -->
+            <div class="results-column">
+                <div class="results-card">
+                    <h2 class="results-title">Your Annual Savings with <span class="text-accent">MYND</span></h2>
+                    
+                    <div class="result-value animate-pulse" id="annualSavings">₹0</div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Current Annual Cost:</span>
+                        <span class="result-number" id="currentCost">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Outsourced Annual Cost:</span>
+                        <span class="result-number" id="outsourcedCost">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">ROI:</span>
+                        <span class="result-number" id="roiPercent">0%</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Payback Period:</span>
+                        <span class="result-number" id="paybackPeriod">0 months</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">3-Year Total Savings:</span>
+                        <span class="result-number" id="threeYearSavings">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">5-Year Total Savings:</span>
+                        <span class="result-number" id="fiveYearSavings">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Current Cost Per Invoice:</span>
+                        <span class="result-number" id="currentCostPerInvoice">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Working Capital Improvement:</span>
+                        <span class="result-number" id="workingCapital">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Annual Discount Captured:</span>
+                        <span class="result-number" id="newDiscountCaptured">₹0</span>
+                    </div>
+                    
+                    <div class="result-detail">
+                        <span class="result-label">Labor Hours Reallocated:</span>
+                        <span class="result-number" id="laborHours">0 hours</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4 class="mb-2">Key Benefits</h4>
+                        <ul class="benefit-list">
+                            <li>Reduced processing costs and faster cycle times</li>
+                            <li>Improved accuracy and compliance</li>
+                            <li>Enhanced cash flow and working capital</li>
+                            <li>Better visibility into AP processes</li>
+                            <li>Greater scalability for growth</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn">Get Your Custom Analysis</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 MYND Business Process Management. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Direct access to all sliders and their value displays
+            const sliders = document.querySelectorAll('input[type="range"]');
+            
+            // Results elements
+            const resultElements = {
+                annualSavings: document.getElementById('annualSavings'),
+                currentCost: document.getElementById('currentCost'),
+                outsourcedCost: document.getElementById('outsourcedCost'),
+                roiPercent: document.getElementById('roiPercent'),
+                paybackPeriod: document.getElementById('paybackPeriod'),
+                threeYearSavings: document.getElementById('threeYearSavings'),
+                fiveYearSavings: document.getElementById('fiveYearSavings'),
+                workingCapital: document.getElementById('workingCapital'),
+                laborHours: document.getElementById('laborHours'),
+                currentCostPerInvoice: document.getElementById('currentCostPerInvoice'),
+                newDiscountCaptured: document.getElementById('newDiscountCaptured')
+            };
+            
+            // Format currency
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('en-IN', {
+                    style: 'currency',
+                    currency: 'INR',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(value);
+            }
+            
+            // Format percentage
+            function formatPercent(value, decimals = 0) {
+                return value.toFixed(decimals) + '%';
+            }
+            
+            // Format number with thousands separator
+            function formatNumber(value, decimals = 0) {
+                return new Intl.NumberFormat('en-IN', {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals
+                }).format(value);
+            }
+            
+            // Update the display value for a slider
+            function updateSliderValue(slider) {
+                const sliderId = slider.id;
+                const valueDisplay = document.getElementById(sliderId + 'Value');
+                
+                if (!valueDisplay) {
+                    console.error(`Value display element not found for slider: ${sliderId}`);
+                    return;
+                }
+                
+                const value = slider.value;
+                console.log(`Updating slider ${sliderId} with value ${value}`);
+                
+                try {
+                    // Format based on slider type
+                    if (sliderId === 'annualInvoiceVolume') {
+                        valueDisplay.textContent = formatNumber(value);
+                    } else if (sliderId === 'apStaffCount' || sliderId === 'retainedStaff') {
+                        valueDisplay.textContent = value;
+                    } else if (sliderId === 'contractYears') {
+                        valueDisplay.textContent = value + ' years';
+                    } else if (sliderId === 'outsourcedCostPerInvoice') {
+                        valueDisplay.textContent = '₹' + parseFloat(value).toFixed(2);
+                    } else if (sliderId === 'errorRate') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'latePaymentPercent') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'discountEligible') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'discountPercent') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'discountCaptureRate') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'newErrorRate') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'newLatePayment') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId === 'newDiscountCapture') {
+                        valueDisplay.textContent = value + '%';
+                    } else if (sliderId.includes('Rate') || sliderId.includes('Percent') || sliderId.includes('Payment') || sliderId.includes('Eligible') || sliderId.includes('Capture')) {
+                        valueDisplay.textContent = formatPercent(value);
+                    } else {
+                        valueDisplay.textContent = formatCurrency(value);
+                    }
+                    console.log(`Successfully updated ${sliderId} display to: ${valueDisplay.textContent}`);
+                } catch (error) {
+                    console.error(`Error updating slider ${sliderId}:`, error);
+                }
+            }
+            
+            // Calculate ROI
+            function calculateROI() {
+                // Get all input values directly from the DOM
+                const annualInvoiceVolume = parseInt(document.getElementById('annualInvoiceVolume').value);
+                const apStaffCount = parseInt(document.getElementById('apStaffCount').value);
+                const employeeCost = parseFloat(document.getElementById('employeeCost').value);
+                const techCosts = parseFloat(document.getElementById('techCosts').value);
+                
+                const errorRate = parseFloat(document.getElementById('errorRate').value) / 100;
+                const errorCost = parseFloat(document.getElementById('errorCost').value);
+                const latePaymentPercent = parseFloat(document.getElementById('latePaymentPercent').value) / 100;
+                const lateFee = parseFloat(document.getElementById('lateFee').value);
+                
+                const discountEligible = parseFloat(document.getElementById('discountEligible').value) / 100;
+                const discountPercent = parseFloat(document.getElementById('discountPercent').value) / 100;
+                const discountCaptureRate = parseFloat(document.getElementById('discountCaptureRate').value) / 100;
+                const complianceCosts = parseFloat(document.getElementById('complianceCosts').value);
+                
+                const outsourcedCostPerInvoice = parseFloat(document.getElementById('outsourcedCostPerInvoice').value);
+                const retainedStaff = parseInt(document.getElementById('retainedStaff').value);
+                const implementationCost = parseFloat(document.getElementById('implementationCost').value);
+                const contractYears = parseInt(document.getElementById('contractYears').value);
+                
+                const newErrorRate = parseFloat(document.getElementById('newErrorRate').value) / 100;
+                const newLatePayment = parseFloat(document.getElementById('newLatePayment').value) / 100;
+                const newDiscountCapture = parseFloat(document.getElementById('newDiscountCapture').value) / 100;
+                const newComplianceCosts = parseFloat(document.getElementById('newComplianceCosts').value);
+                
+                // For new calculations (these would typically be additional sliders)
+                // Using default values for demonstration
+                const monthlyInvoiceVolume = annualInvoiceVolume / 12; // Calculated from annual volume
+                const averageInvoiceAmount = 5000; // Default value
+                const currentProcessingDays = 15; // Default value
+                const newProcessingDays = 5; // Default value
+                const costOfCapital = 0.08; // 8% default cost of capital
+                const hoursSavedPerInvoice = 0.25; // Default 15 minutes per invoice
+                
+                // 1. Calculate Current In-House Processing Costs
+                // Annual Invoice Volume calculation (already have annualInvoiceVolume)
+                
+                // Total Staff Cost
+                const totalStaffCost = apStaffCount * employeeCost;
+                
+                // Technology Costs (already have techCosts)
+                
+                // Base Processing Cost
+                const baseProcessingCost = totalStaffCost + techCosts;
+                
+                // Current Cost Per Invoice
+                const currentCostPerInvoice = baseProcessingCost / annualInvoiceVolume;
+                
+                // Error-Related Costs
+                const errorRelatedCosts = annualInvoiceVolume * errorRate * errorCost;
+                
+                // Late Payment Costs
+                const latePaymentCosts = annualInvoiceVolume * latePaymentPercent * lateFee;
+                
+                // Missed Discount Opportunity
+                const missedDiscountOpportunity = annualInvoiceVolume * discountEligible * discountPercent * (1 - discountCaptureRate);
+                
+                // Storage & Compliance Costs (already have complianceCosts)
+                
+                // TOTAL CURRENT COST
+                const totalCurrentCost = baseProcessingCost + errorRelatedCosts + latePaymentCosts + missedDiscountOpportunity + complianceCosts;
+                
+                // 2. Calculate Projected Outsourced Processing Costs
+                // BPM Service Fees
+                const bpmServiceFees = annualInvoiceVolume * outsourcedCostPerInvoice;
+                
+                // Retained Internal Costs
+                const retainedInternalCosts = retainedStaff * employeeCost;
+                
+                // Implementation Cost (Amortized)
+                const implementationCostAmortized = implementationCost / contractYears;
+                
+                // New Error-Related Costs
+                const newErrorRelatedCosts = annualInvoiceVolume * newErrorRate * errorCost;
+                
+                // New Late Payment Costs
+                const newLatePaymentCosts = annualInvoiceVolume * newLatePayment * lateFee;
+                
+                // New Discount Capture (this is now captured discounts, not missed ones)
+                const newDiscountCaptured = annualInvoiceVolume * discountEligible * discountPercent * newDiscountCapture;
+                
+                // New Storage & Compliance Costs (already have newComplianceCosts)
+                
+                // TOTAL OUTSOURCED COST
+                const totalOutsourcedCost = bpmServiceFees + retainedInternalCosts + implementationCostAmortized + 
+                                            newErrorRelatedCosts + newLatePaymentCosts + newComplianceCosts - newDiscountCaptured;
+                
+                // 3. Calculate ROI Metrics
+                // ANNUAL COST SAVINGS
+                const annualCostSavings = totalCurrentCost - totalOutsourcedCost;
+                
+                // ROI Percentage
+                const roiPercentage = (annualCostSavings / implementationCost) * 100;
+                
+                // Payback Period (months)
+                const paybackPeriodMonths = implementationCost / (annualCostSavings / 12);
+                
+                // 3-Year Total Savings
+                const threeYearSavings = (annualCostSavings * 3) - implementationCost;
+                
+                // 5-Year Total Savings
+                const fiveYearSavings = (annualCostSavings * 5) - implementationCost;
+                
+                // Working Capital Improvement
+                const workingCapitalImprovement = averageInvoiceAmount * annualInvoiceVolume * 
+                                                (currentProcessingDays - newProcessingDays) / 365 * costOfCapital;
+                
+                // Labor Hours Reallocated
+                const laborHoursReallocated = annualInvoiceVolume * hoursSavedPerInvoice;
+                
+                // Update results display
+                resultElements.annualSavings.textContent = formatCurrency(annualCostSavings);
+                resultElements.currentCost.textContent = formatCurrency(totalCurrentCost);
+                resultElements.outsourcedCost.textContent = formatCurrency(totalOutsourcedCost);
+                resultElements.roiPercent.textContent = formatPercent(roiPercentage, 1);
+                resultElements.paybackPeriod.textContent = paybackPeriodMonths.toFixed(1) + ' months';
+                resultElements.threeYearSavings.textContent = formatCurrency(threeYearSavings);
+                
+                // Update new results elements if they exist
+                if (resultElements.fiveYearSavings) {
+                    resultElements.fiveYearSavings.textContent = formatCurrency(fiveYearSavings);
+                }
+                if (resultElements.workingCapital) {
+                    resultElements.workingCapital.textContent = formatCurrency(workingCapitalImprovement);
+                }
+                if (resultElements.laborHours) {
+                    resultElements.laborHours.textContent = formatNumber(laborHoursReallocated) + ' hours';
+                }
+                if (resultElements.currentCostPerInvoice) {
+                    resultElements.currentCostPerInvoice.textContent = formatCurrency(currentCostPerInvoice);
+                }
+                if (resultElements.newDiscountCaptured) {
+                    resultElements.newDiscountCaptured.textContent = formatCurrency(newDiscountCaptured);
+                }
+                
+                // Add animation to highlight changes
+                resultElements.annualSavings.classList.remove('animate-pulse');
+                setTimeout(() => {
+                    resultElements.annualSavings.classList.add('animate-pulse');
+                }, 10);
+                
+                console.log('ROI calculation updated');
+            }
+            
+            // Initialize all slider values
+            function initializeSliders() {
+                console.log('Initializing sliders...');
+                sliders.forEach(slider => {
+                    console.log(`Initializing slider: ${slider.id} with value: ${slider.value}`);
+                    updateSliderValue(slider);
+                });
+                calculateROI();
+                console.log('Sliders initialized');
+                
+                // Double-check all display values
+                setTimeout(() => {
+                    console.log('Verifying slider display values...');
+                    sliders.forEach(slider => {
+                        const displayId = slider.id + 'Value';
+                        const display = document.getElementById(displayId);
+                        if (display) {
+                            console.log(`${slider.id}: value=${slider.value}, display=${display.textContent}`);
+                        } else {
+                            console.error(`Display element not found for: ${displayId}`);
+                        }
+                    });
+                }, 500);
+            }
+            
+            // Add event listeners to all sliders
+            console.log(`Found ${sliders.length} sliders on the page`);
+            sliders.forEach(slider => {
+                console.log(`Setting up events for slider: ${slider.id}`);
+                
+                // Force immediate update to ensure display values are set
+                updateSliderValue(slider);
+                
+                // Use both input and change events for better compatibility
+                ['input', 'change'].forEach(eventType => {
+                    slider.addEventListener(eventType, function(event) {
+                        console.log(`${eventType} event on slider ${this.id} changed to ${this.value}`);
+                        // Stop event propagation to prevent any conflicts
+                        event.stopPropagation();
+                        // Update the display value
+                        updateSliderValue(this);
+                        // Recalculate ROI
+                        calculateROI();
+                    });
+                });
+            });
+            
+            // Re-initialize all sliders to ensure proper display
+            setTimeout(() => {
+                console.log('Re-initializing all sliders to ensure proper display');
+                sliders.forEach(slider => {
+                    console.log(`Re-initializing slider: ${slider.id}`);
+                    updateSliderValue(slider);
+                });
+            }, 100);
+            
+            // Force update for problematic sliders
+            setTimeout(() => {
+                console.log('Forcing update for problematic sliders');
+                const problematicSliders = ['discountPercent', 'newErrorRate'];
+                problematicSliders.forEach(id => {
+                    const slider = document.getElementById(id);
+                    if (slider) {
+                        console.log(`Forcing update for slider: ${id} with value ${slider.value}`);
+                        const valueDisplay = document.getElementById(id + 'Value');
+                        if (valueDisplay) {
+                            valueDisplay.textContent = slider.value + '%';
+                            console.log(`Manually set ${id} display to: ${valueDisplay.textContent}`);
+                        }
+                    }
+                });
+            }, 200);
+            
+            // Initialize everything
+            initializeSliders();
+            
+            // Add event listener for calculate button
+            const calculateButton = document.getElementById('calculateButton');
+            if (calculateButton) {
+                calculateButton.addEventListener('click', function() {
+                    console.log('Calculate button clicked');
+                    calculateROI();
+                    
+                    // Add visual feedback
+                    this.textContent = 'Calculation Updated!';
+                    this.classList.add('btn-success');
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Calculate ROI';
+                        this.classList.remove('btn-success');
+                    }, 1500);
+                });
+            }
+            
+            console.log('ROI calculator initialized');
+        });
+    </script>
+</body>
+</html>
