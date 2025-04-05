@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Bhalla | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        /* Base Styles */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #4f46e5;
+            --secondary-dark: #4338ca;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #ffffff;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-2: #4f46e5;
+            --success: #10b981;
+
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            font-family: var(--font-secondary);
+            font-weight: 400;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Background Shapes */
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(67, 97, 238, 0.15);
+            top: -200px;
+            right: -100px;
+            animation: float-slow 20s infinite alternate ease-in-out;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(247, 37, 133, 0.1);
+            bottom: -100px;
+            left: -150px;
+            animation: float-slow 15s infinite alternate-reverse ease-in-out;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(76, 201, 240, 0.15);
+            top: 50%;
+            left: 30%;
+            animation: float-slow 18s infinite alternate ease-in-out;
+        }
+
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(10deg); }
+        }
+
+        /* Content Styles */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-family: var(--font-primary);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            text-decoration: none;
+            margin: 2rem 0;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.7);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .byline {
+            font-family: var(--font-secondary);
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Favicon */
+        .favicon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-bolt"></i> Amit Bhalla
+        </div>
+        <h1>Welcome to My Resource Hub</h1>
+        <a href="https://amitbhalla.github.io/playbooks/" class="btn">
+            <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>Click here to go to Resources Hub
+        </a>
+        <p class="byline">Site built by Amit Bhalla and is Work in Progress</p>
+    </div>
+
+    <script>
+        // Create favicon dynamically
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        
+        // Create a canvas for the favicon
+        const canvas = document.createElement('canvas');
+        canvas.width = 32;
+        canvas.height = 32;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw background
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(0, 0, 32, 32);
+        
+        // Draw a stylized "A" or lightning bolt
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 24px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('A', 16, 16);
+        
+        // Convert to data URL
+        faviconLink.href = canvas.toDataURL('image/png');
+        document.head.appendChild(faviconLink);
+
+        // Simple animation for the gradient background
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const offsetX = (index + 1) * 10 * (x - 0.5);
+                const offsetY = (index + 1) * 10 * (y - 0.5);
+                shape.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+    </script>
+    
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3390302526393146" crossorigin="anonymous"></script>
+</body>
+</html>
